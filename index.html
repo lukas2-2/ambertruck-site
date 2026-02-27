@@ -574,13 +574,15 @@
             .contacts-map {
                 height: 300px;
             }
-            @media (max-width: 768px) {
+@media (max-width: 768px) {
 
+  /* Контакты */
   #contacts {
       padding: 20px 15px;
       min-height: auto;
-      background-image: none;
-      background-color: #222;
+      background-size: cover;
+      background-position: center;
+      margin-bottom: 0;
   }
 
   #contacts h2 {
@@ -592,10 +594,23 @@
       gap: 20px;
   }
 
+  /* Карта */
   .contacts-map {
       height: 180px;
+      margin-bottom: 0;
   }
-        }
+
+  .contacts-map iframe {
+      height: 180px !important;
+  }
+
+  /* Убираем отступ перед футером */
+  footer {
+      margin: 0;
+      padding-top: 20px;
+  }
+
+}
     </style>
 </head>
 <body>
@@ -778,6 +793,7 @@
     </script>
 </body>
 </html>
+
 
 
 

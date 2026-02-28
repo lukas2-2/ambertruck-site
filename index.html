@@ -703,17 +703,23 @@
     <section id="hits" class="section">
         <h2>Хиты продаж</h2>
         <div class="products-grid">
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="images/stop1.png" alt="Стоп сигнал">
-                </div>
-                <div class="product-info">
-                    <div class="product-name">Стоп сигнал</div>
-                    <div class="product-article">Артикул: Ожидается</div>
-                    <div class="product-price">7 500 ₽</div>
-                    <button class="buy-btn" onclick="addToCart('Стоп сигнал', 'Артикул: Ожидается', 7500, '/public/712A21EC-3EA4-4279-AE52-C55625A19FBE.png')">Купить</button>
-                </div>
-            </div>
+           <div class="product-card"
+     data-name="Стоп сигнал"
+     data-sku="stop001"
+     data-price="7500">
+
+    <div class="product-image">
+        <img src="images/stop1.png" alt="Стоп сигнал">
+    </div>
+
+    <div class="product-info">
+        <div class="product-name">Стоп сигнал</div>
+        <div class="product-article">Артикул: Ожидается</div>
+        <div class="product-price">7 500 ₽</div>
+
+        <button class="buy-btn">Купить</button>
+    </div>
+</div>
             <div class="product-card">
                 <div class="product-image">
                     <img src="images/fuel1.png" alt="Насос ТНВД">
@@ -788,6 +794,7 @@
     <script src="cart.js"></script>
     </body>
 </html>
+
 
 
 

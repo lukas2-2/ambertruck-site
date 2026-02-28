@@ -1,0 +1,727 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Расходники — AmberTruck JM93</title>
+  <meta name="description" content="Каталог запчастей двигателя AmberTruck JM93. Поиск, фильтры, корзина." />
+  <style>
+    :root {
+      --bg:#f5f5f5;
+      --card:#ffffff;
+      --text:#222;
+      --muted:#6b7280;
+      --line:#e5e7eb;
+      --black:#000;
+      --radius:14px;
+      --shadow:0 10px 30px rgba(0,0,0,.08);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1100px;margin:0 auto;padding:0 16px;}
+    header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.92);backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid var(--line);}
+    .header-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;}
+    .brand{display:flex;flex-direction:column;gap:2px;}
+    .brand b{font-size:16px;letter-spacing:.2px}
+    .brand span{font-size:12px;color:var(--muted)}
+    .header-actions{display:flex;align-items:center;gap:10px;}
+    .btn{border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px 12px;font-weight:600;cursor:pointer}
+    .btn:hover{border-color:#cfd5dd}
+    .btn-dark{background:#000;color:#fff;border-color:#000;}
+    .btn-dark:hover{opacity:.92}
+    .cart-btn{display:flex;align-items:center;gap:8px;}
+    .badge{min-width:26px;height:22px;padding:0 8px;border-radius:999px;background:#111;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
+    main{padding:18px 0 40px}
+    h1{margin:10px 0 6px;font-size:22px}
+    .sub{color:var(--muted);font-size:13px}
+    .panel{margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:12px;}
+    .filters{display:grid;grid-template-columns: 1.4fr .6fr .6fr .7fr auto;gap:10px;align-items:center;}
+    .field{display:flex;flex-direction:column;gap:6px}
+    label{font-size:12px;color:var(--muted)}
+    input, select{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:12px;font-size:14px;background:#fff;outline:none}
+    input:focus, select:focus{border-color:#b8bec7}
+    .hint{font-size:12px;color:var(--muted);margin-top:10px}
+    .table-wrap{margin-top:12px;overflow:hidden;border-radius:var(--radius);border:1px solid var(--line);background:#fff;box-shadow:var(--shadow);}
+    table{width:100%;border-collapse:separate;border-spacing:0}
+    thead th{text-align:left;font-size:12px;color:var(--muted);padding:12px;border-bottom:1px solid var(--line);background:#fafafa;}
+    tbody td{padding:12px;border-bottom:1px solid var(--line);vertical-align:middle}
+    tbody tr:last-child td{border-bottom:none}
+    .col-price{white-space:nowrap;font-weight:700}
+    .buy-btn{border:1px solid #000;background:#000;color:#fff;border-radius:12px;padding:10px 12px;font-weight:700;cursor:pointer}
+    .buy-btn:hover{opacity:.92}
+    .empty{padding:20px;color:var(--muted);text-align:center}
+    /* Modal */
+    .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:flex-end;justify-content:center;z-index:50}
+    .modal{width:min(720px, 100%);background:#fff;border-radius:18px 18px 0 0;max-height:85vh;overflow:auto;box-shadow:0 -20px 60px rgba(0,0,0,.25);}
+    .modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line);position:sticky;top:0;background:#fff}
+    .modal-head h2{margin:0;font-size:16px}
+    .cart-list{padding:10px 16px}
+    .cart-item{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line)}
+    .cart-item:last-child{border-bottom:none}
+    .cart-item b{display:block;font-size:14px}
+    .cart-item small{color:var(--muted)}
+    .qty-controls{display:flex;align-items:center;gap:8px;white-space:nowrap}
+    .icon-btn{width:34px;height:34px;border-radius:10px;border:1px solid var(--line);background:#fff;cursor:pointer;font-weight:900}
+    .icon-btn:hover{border-color:#cfd5dd}
+    .total{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-top:1px solid var(--line);background:#fafafa}
+    footer{padding:18px 0;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
+    /* Mobile */
+    @media (max-width: 860px){
+      .filters{grid-template-columns:1fr 1fr;}
+    }
+    @media (max-width: 768px){
+      .header-row{flex-wrap:wrap}
+      .filters{grid-template-columns:1fr;}
+      table thead{display:none}
+      table, tbody, tr, td{display:block;width:100%}
+      tbody tr{border-bottom:1px solid var(--line);padding:8px 12px}
+      tbody tr:last-child{border-bottom:none}
+      tbody td{border:none;padding:8px 0;display:flex;align-items:center;justify-content:space-between;gap:12px}
+      tbody td::before{content:attr(data-label);color:var(--muted);font-size:12px;flex:0 0 auto}
+      .col-actions{justify-content:flex-end}
+      .modal-backdrop{align-items:flex-end}
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <div class="header-row">
+      <a class="brand" href="index.html" title="На главную">
+        <b>AmberTruck JM93</b>
+        <span>Запчасти • Категория: Расходники</span>
+      </a>
+
+      <div class="header-actions">
+        <a class="btn" href="index.html">← Назад</a>
+        <a class="btn btn-dark cart-btn" href="cart.html">Корзина <span class="badge" id="cartCount">0</span></a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <h1>Расходники</h1>
+    <div class="sub">Товаров: <b id="totalItems">50</b> • Обновлено: 2026-02-27 23:34</div>
+
+    <div class="panel">
+      <div class="filters">
+        <div class="field">
+          <label for="q">Поиск по названию или артикулу</label>
+          <input id="q" type="search" placeholder="Например: прокладка, датчик, CN3..." autocomplete="off" />
+        </div>
+
+        <div class="field">
+          <label for="minP">Цена от</label>
+          <input id="minP" inputmode="numeric" placeholder="0" />
+        </div>
+
+        <div class="field">
+          <label for="maxP">Цена до</label>
+          <input id="maxP" inputmode="numeric" placeholder="999999" />
+        </div>
+
+        <div class="field">
+          <label for="sort">Сортировка</label>
+          <select id="sort">
+            <option value="default">Как в списке</option>
+            <option value="price_asc">Цена ↑</option>
+            <option value="price_desc">Цена ↓</option>
+            <option value="name_asc">Название А–Я</option>
+            <option value="name_desc">Название Я–А</option>
+          </select>
+        </div>
+
+        <button class="btn" id="reset" type="button" title="Сбросить фильтры">Сбросить</button>
+      </div>
+
+      <div class="hint">Совет: можно вводить часть артикула — фильтрация срабатывает сразу.</div>
+    </div>
+
+    <div class="table-wrap">
+      <table id="itemsTable">
+        <thead>
+          <tr>
+            <th style="width:55%">Название</th>
+            <th style="width:18%">Артикул</th>
+            <th style="width:15%">Цена</th>
+            <th style="width:12%"></th>
+          </tr>
+        </thead>
+        <tbody id="tbody">
+<tr class="item-row" data-name="Подшипник задней ступицы: внутренний" data-sku="240010204" data-price="7140.00">
+<td class="col-name" data-label="Название">Подшипник задней ступицы: внутренний</td>
+<td class="col-sku" data-label="Артикул">240010204</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="7140.00">7 140 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Подшипник задней ступицы: внутренний" data-sku="240010204" data-price="7140.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Подшипник задней ступицы: внешний" data-sku="240010304" data-price="6090.00">
+<td class="col-name" data-label="Название">Подшипник задней ступицы: внешний</td>
+<td class="col-sku" data-label="Артикул">240010304</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="6090.00">6 090 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Подшипник задней ступицы: внешний" data-sku="240010304" data-price="6090.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Сальник задней ступицы наружный  AT JL" data-sku="240010703" data-price="1260.00">
+<td class="col-name" data-label="Название">Сальник задней ступицы наружный  AT JL</td>
+<td class="col-sku" data-label="Артикул">240010703</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="1260.00">1 260 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Сальник задней ступицы наружный  AT JL" data-sku="240010703" data-price="1260.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Стремянка передней рессоры" data-sku="290001113" data-price="630.00">
+<td class="col-name" data-label="Название">Стремянка передней рессоры</td>
+<td class="col-sku" data-label="Артикул">290001113</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="630.00">630 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Стремянка передней рессоры" data-sku="290001113" data-price="630.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Сальник передней ступицы AT JL" data-sku="300010502" data-price="630.00">
+<td class="col-name" data-label="Название">Сальник передней ступицы AT JL</td>
+<td class="col-sku" data-label="Артикул">300010502</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="630.00">630 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Сальник передней ступицы AT JL" data-sku="300010502" data-price="630.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Шайба шкворня регулировочная" data-sku="3001103A1" data-price="210.00">
+<td class="col-name" data-label="Название">Шайба шкворня регулировочная</td>
+<td class="col-sku" data-label="Артикул">3001103A1</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="210.00">210 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Шайба шкворня регулировочная" data-sku="3001103A1" data-price="210.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Шкворень ступицы передней оси" data-sku="300111302" data-price="9240.00">
+<td class="col-name" data-label="Название">Шкворень ступицы передней оси</td>
+<td class="col-sku" data-label="Артикул">300111302</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="9240.00">9 240 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Шкворень ступицы передней оси" data-sku="300111302" data-price="9240.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Упорный подшипник шкворня" data-sku="300111404A" data-price="2100.00">
+<td class="col-name" data-label="Название">Упорный подшипник шкворня</td>
+<td class="col-sku" data-label="Артикул">300111404A</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="2100.00">2 100 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Упорный подшипник шкворня" data-sku="300111404A" data-price="2100.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Пыльник шкворня" data-sku="300112001" data-price="210.00">
+<td class="col-name" data-label="Название">Пыльник шкворня</td>
+<td class="col-sku" data-label="Артикул">300112001</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="210.00">210 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Пыльник шкворня" data-sku="300112001" data-price="210.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Втулка поворотного кулака" data-sku="300115902A" data-price="1890.00">
+<td class="col-name" data-label="Название">Втулка поворотного кулака</td>
+<td class="col-sku" data-label="Артикул">300115902A</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="1890.00">1 890 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Втулка поворотного кулака" data-sku="300115902A" data-price="1890.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Гайка колесная" data-sku="310310602" data-price="2100.00">
+<td class="col-name" data-label="Название">Гайка колесная</td>
+<td class="col-sku" data-label="Артикул">310310602</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="2100.00">2 100 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Гайка колесная" data-sku="310310602" data-price="2100.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Стяжка нейлоновая" data-sku="3774013A" data-price="210.00">
+<td class="col-name" data-label="Название">Стяжка нейлоновая</td>
+<td class="col-sku" data-label="Артикул">3774013A</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="210.00">210 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Стяжка нейлоновая" data-sku="3774013A" data-price="210.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Уплотнительная прокладка сливной пробки" data-sku="3B3-1" data-price="210.00">
+<td class="col-name" data-label="Название">Уплотнительная прокладка сливной пробки</td>
+<td class="col-sku" data-label="Артикул">3B3-1</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="210.00">210 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Уплотнительная прокладка сливной пробки" data-sku="3B3-1" data-price="210.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="уплотнительное кольцо" data-sku="9C002.002" data-price="1260.00">
+<td class="col-name" data-label="Название">уплотнительное кольцо</td>
+<td class="col-sku" data-label="Артикул">9C002.002</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="1260.00">1 260 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="уплотнительное кольцо" data-sku="9C002.002" data-price="1260.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Фланец ступицы заднего моста" data-sku="AB13800" data-price="37800.00">
+<td class="col-name" data-label="Название">Фланец ступицы заднего моста</td>
+<td class="col-sku" data-label="Артикул">AB13800</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="37800.00">37 800 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Фланец ступицы заднего моста" data-sku="AB13800" data-price="37800.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Ступичный подшипник задний внутренний" data-sku="AC1118N" data-price="11760.00">
+<td class="col-name" data-label="Название">Ступичный подшипник задний внутренний</td>
+<td class="col-sku" data-label="Артикул">AC1118N</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="11760.00">11 760 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Ступичный подшипник задний внутренний" data-sku="AC1118N" data-price="11760.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Сальник задней ступицы внутрений AT JM" data-sku="AF1100N" data-price="2100.00">
+<td class="col-name" data-label="Название">Сальник задней ступицы внутрений AT JM</td>
+<td class="col-sku" data-label="Артикул">AF1100N</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="2100.00">2 100 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Сальник задней ступицы внутрений AT JM" data-sku="AF1100N" data-price="2100.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Стремянка передней рессоры" data-sku="BN3-5705-BC" data-price="1260.00">
+<td class="col-name" data-label="Название">Стремянка передней рессоры</td>
+<td class="col-sku" data-label="Артикул">BN3-5705-BC</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="1260.00">1 260 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Стремянка передней рессоры" data-sku="BN3-5705-BC" data-price="1260.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Шпилька" data-sku="CN1200830-A01" data-price="420.00">
+<td class="col-name" data-label="Название">Шпилька</td>
+<td class="col-sku" data-label="Артикул">CN1200830-A01</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="420.00">420 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Шпилька" data-sku="CN1200830-A01" data-price="420.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Фильтр воздушный кондиционера" data-sku="DF100K5DAA01 000" data-price="3990.00">
+<td class="col-name" data-label="Название">Фильтр воздушный кондиционера</td>
+<td class="col-sku" data-label="Артикул">DF100K5DAA01 000</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="3990.00">3 990 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Фильтр воздушный кондиционера" data-sku="DF100K5DAA01 000" data-price="3990.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Подшипник ступичный внутренний" data-sku="DFL1060T-AC" data-price="9030.00">
+<td class="col-name" data-label="Название">Подшипник ступичный внутренний</td>
+<td class="col-sku" data-label="Артикул">DFL1060T-AC</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="9030.00">9 030 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Подшипник ступичный внутренний" data-sku="DFL1060T-AC" data-price="9030.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Фильтрующий элемент вторичного топл. фильтра AT JL, JM" data-sku="EGN1-9156-AA" data-price="3990.00">
+<td class="col-name" data-label="Название">Фильтрующий элемент вторичного топл. фильтра AT JL, JM</td>
+<td class="col-sku" data-label="Артикул">EGN1-9156-AA</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="3990.00">3 990 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Фильтрующий элемент вторичного топл. фильтра AT JL, JM" data-sku="EGN1-9156-AA" data-price="3990.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Пыльник привода" data-sku="EJN3-4A500-AA" data-price="840.00">
+<td class="col-name" data-label="Название">Пыльник привода</td>
+<td class="col-sku" data-label="Артикул">EJN3-4A500-AA</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="840.00">840 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Пыльник привода" data-sku="EJN3-4A500-AA" data-price="840.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Испаритель кондциционера" data-sku="HC200K5DAB01 000" data-price="37380.00">
+<td class="col-name" data-label="Название">Испаритель кондциционера</td>
+<td class="col-sku" data-label="Артикул">HC200K5DAB01 000</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="37380.00">37 380 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Испаритель кондциционера" data-sku="HC200K5DAB01 000" data-price="37380.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Болт задней рессоры" data-sku="HN1-5705-AB" data-price="3360.00">
+<td class="col-name" data-label="Название">Болт задней рессоры</td>
+<td class="col-sku" data-label="Артикул">HN1-5705-AB</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="3360.00">3 360 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Болт задней рессоры" data-sku="HN1-5705-AB" data-price="3360.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Уплотнительное кольцо заглушки корпуса масляного фильтра" data-sku="JLQ163-1003" data-price="3360.00">
+<td class="col-name" data-label="Название">Уплотнительное кольцо заглушки корпуса масляного фильтра</td>
+<td class="col-sku" data-label="Артикул">JLQ163-1003</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="3360.00">3 360 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Уплотнительное кольцо заглушки корпуса масляного фильтра" data-sku="JLQ163-1003" data-price="3360.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Ремень приводной кондиционера" data-sku="JN1-19896-AB" data-price="2730.00">
+<td class="col-name" data-label="Название">Ремень приводной кондиционера</td>
+<td class="col-sku" data-label="Артикул">JN1-19896-AB</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="2730.00">2 730 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Ремень приводной кондиционера" data-sku="JN1-19896-AB" data-price="2730.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Двигатель в сборе, дизельный, с турбонаддувом, 2478 см3, 128 л.с. (94 кВт)" data-sku="JX4D25B4L-3084" data-price="2940210.00">
+<td class="col-name" data-label="Название">Двигатель в сборе, дизельный, с турбонаддувом, 2478 см3, 128 л.с. (94 кВт)</td>
+<td class="col-sku" data-label="Артикул">JX4D25B4L-3084</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="2940210.00">2 940 210 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Двигатель в сборе, дизельный, с турбонаддувом, 2478 см3, 128 л.с. (94 кВт)" data-sku="JX4D25B4L-3084" data-price="2940210.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Свеча накаливания" data-sku="KN3-6M090-AA" data-price="3780.00">
+<td class="col-name" data-label="Название">Свеча накаливания</td>
+<td class="col-sku" data-label="Артикул">KN3-6M090-AA</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="3780.00">3 780 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Свеча накаливания" data-sku="KN3-6M090-AA" data-price="3780.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Болт крепления переднего колеса" data-sku="LN6-1107-DA" data-price="630.00">
+<td class="col-name" data-label="Название">Болт крепления переднего колеса</td>
+<td class="col-sku" data-label="Артикул">LN6-1107-DA</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="630.00">630 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Болт крепления переднего колеса" data-sku="LN6-1107-DA" data-price="630.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Щетка стеклоочистителя" data-sku="LN6-17528-AA" data-price="7140.00">
+<td class="col-name" data-label="Название">Щетка стеклоочистителя</td>
+<td class="col-sku" data-label="Артикул">LN6-17528-AA</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="7140.00">7 140 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Щетка стеклоочистителя" data-sku="LN6-17528-AA" data-price="7140.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Щетка стеклоочистителя" data-sku="LN6-17528-CA" data-price="7140.00">
+<td class="col-name" data-label="Название">Щетка стеклоочистителя</td>
+<td class="col-sku" data-label="Артикул">LN6-17528-CA</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="7140.00">7 140 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Щетка стеклоочистителя" data-sku="LN6-17528-CA" data-price="7140.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Фильтр осушителя воздуха AT JM" data-sku="LN6-19E961-AA-03" data-price="15750.00">
+<td class="col-name" data-label="Название">Фильтр осушителя воздуха AT JM</td>
+<td class="col-sku" data-label="Артикул">LN6-19E961-AA-03</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="15750.00">15 750 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Фильтр осушителя воздуха AT JM" data-sku="LN6-19E961-AA-03" data-price="15750.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Отбойник передней подвески" data-sku="LN6-3020-AA" data-price="2520.00">
+<td class="col-name" data-label="Название">Отбойник передней подвески</td>
+<td class="col-sku" data-label="Артикул">LN6-3020-AA</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="2520.00">2 520 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Отбойник передней подвески" data-sku="LN6-3020-AA" data-price="2520.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Заглушка шкворня" data-sku="LN6-3081-AA" data-price="2310.00">
+<td class="col-name" data-label="Название">Заглушка шкворня</td>
+<td class="col-sku" data-label="Артикул">LN6-3081-AA</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="2310.00">2 310 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Заглушка шкворня" data-sku="LN6-3081-AA" data-price="2310.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Отбойник задней подвески" data-sku="LN6-5K827-BA" data-price="5250.00">
+<td class="col-name" data-label="Название">Отбойник задней подвески</td>
+<td class="col-sku" data-label="Артикул">LN6-5K827-BA</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="5250.00">5 250 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Отбойник задней подвески" data-sku="LN6-5K827-BA" data-price="5250.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Пресс-масленка шкворня" data-sku="M6-GB1152" data-price="210.00">
+<td class="col-name" data-label="Название">Пресс-масленка шкворня</td>
+<td class="col-sku" data-label="Артикул">M6-GB1152</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="210.00">210 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Пресс-масленка шкворня" data-sku="M6-GB1152" data-price="210.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Фильтрующий элемент воздушного фильтра AT JM" data-sku="MN1-9601-AA" data-price="7770.00">
+<td class="col-name" data-label="Название">Фильтрующий элемент воздушного фильтра AT JM</td>
+<td class="col-sku" data-label="Артикул">MN1-9601-AA</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="7770.00">7 770 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Фильтрующий элемент воздушного фильтра AT JM" data-sku="MN1-9601-AA" data-price="7770.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Втулка шкворня" data-sku="MN6-3015-AA" data-price="1260.00">
+<td class="col-name" data-label="Название">Втулка шкворня</td>
+<td class="col-sku" data-label="Артикул">MN6-3015-AA</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="1260.00">1 260 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Втулка шкворня" data-sku="MN6-3015-AA" data-price="1260.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Тяга рулевая" data-sku="MN6-3300-BA" data-price="21840.00">
+<td class="col-name" data-label="Название">Тяга рулевая</td>
+<td class="col-sku" data-label="Артикул">MN6-3300-BA</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="21840.00">21 840 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Тяга рулевая" data-sku="MN6-3300-BA" data-price="21840.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Шкворень ступицы передней оси" data-sku="MN6-3A071-AA" data-price="2940.00">
+<td class="col-name" data-label="Название">Шкворень ступицы передней оси</td>
+<td class="col-sku" data-label="Артикул">MN6-3A071-AA</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="2940.00">2 940 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Шкворень ступицы передней оси" data-sku="MN6-3A071-AA" data-price="2940.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Шайба шкворня регулировочная" data-sku="MN6-4035-AA" data-price="210.00">
+<td class="col-name" data-label="Название">Шайба шкворня регулировочная</td>
+<td class="col-sku" data-label="Артикул">MN6-4035-AA</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="210.00">210 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Шайба шкворня регулировочная" data-sku="MN6-4035-AA" data-price="210.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Карданный вал задний" data-sku="MN6-4K145-DA" data-price="92610.00">
+<td class="col-name" data-label="Название">Карданный вал задний</td>
+<td class="col-sku" data-label="Артикул">MN6-4K145-DA</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="92610.00">92 610 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Карданный вал задний" data-sku="MN6-4K145-DA" data-price="92610.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Стремянка рессоры" data-sku="MN6-5317-AA" data-price="1050.00">
+<td class="col-name" data-label="Название">Стремянка рессоры</td>
+<td class="col-sku" data-label="Артикул">MN6-5317-AA</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="1050.00">1 050 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Стремянка рессоры" data-sku="MN6-5317-AA" data-price="1050.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Проушина рессоры" data-sku="MN6-5776-AA" data-price="2310.00">
+<td class="col-name" data-label="Название">Проушина рессоры</td>
+<td class="col-sku" data-label="Артикул">MN6-5776-AA</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="2310.00">2 310 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Проушина рессоры" data-sku="MN6-5776-AA" data-price="2310.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Проушина задней рессоры" data-sku="MN6-5A556-AA" data-price="2100.00">
+<td class="col-name" data-label="Название">Проушина задней рессоры</td>
+<td class="col-sku" data-label="Артикул">MN6-5A556-AA</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="2100.00">2 100 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Проушина задней рессоры" data-sku="MN6-5A556-AA" data-price="2100.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Фильтр масляный AT JM" data-sku="NN6-6612-AA" data-price="2730.00">
+<td class="col-name" data-label="Название">Фильтр масляный AT JM</td>
+<td class="col-sku" data-label="Артикул">NN6-6612-AA</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="2730.00">2 730 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Фильтр масляный AT JM" data-sku="NN6-6612-AA" data-price="2730.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Листовая рессора задняя" data-sku="PAB3-5556-CA" data-price="88410.00">
+<td class="col-name" data-label="Название">Листовая рессора задняя</td>
+<td class="col-sku" data-label="Артикул">PAB3-5556-CA</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="88410.00">88 410 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Листовая рессора задняя" data-sku="PAB3-5556-CA" data-price="88410.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Рессора передняя" data-sku="PAB3-5W310-CA" data-price="42210.00">
+<td class="col-name" data-label="Название">Рессора передняя</td>
+<td class="col-sku" data-label="Артикул">PAB3-5W310-CA</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="42210.00">42 210 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Рессора передняя" data-sku="PAB3-5W310-CA" data-price="42210.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Топливный фильтр в сборе" data-sku="PAB3-9155-CA" data-price="18060.00">
+<td class="col-name" data-label="Название">Топливный фильтр в сборе</td>
+<td class="col-sku" data-label="Артикул">PAB3-9155-CA</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="18060.00">18 060 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Топливный фильтр в сборе" data-sku="PAB3-9155-CA" data-price="18060.00">В корзину</button>
+</td>
+</tr>
+</tbody>
+      </table>
+      <div class="empty" id="empty" style="display:none;">Ничего не найдено. Попробуй изменить фильтры.</div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">© 2024 AmberTruck JM93. Локальная корзина в браузере (не стирается при переходах между категориями).</div>
+</footer>
+
+<!-- Cart Modal -->
+<div class="modal-backdrop" id="cartBackdrop" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-label="Корзина">
+    <div class="modal-head">
+      <h2>Корзина</h2>
+      <button class="btn" id="closeCart" type="button">Закрыть</button>
+    </div>
+
+    <div class="cart-list" id="cartList"></div>
+
+    <div class="total">
+      <div>Итого: <b id="cartTotal">0 ₽</b></div>
+      <button class="btn" id="clearCart" type="button">Очистить</button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+(function(){
+  const tbodyEl = document.getElementById("tbody") || document.querySelector("#itemsTable tbody");
+  if (!tbodyEl) return;
+
+  const q = document.getElementById("q");
+  const minP = document.getElementById("minP");
+  const maxP = document.getElementById("maxP");
+  const sort = document.getElementById("sort");
+  const reset = document.getElementById("reset");
+  const emptyEl = document.getElementById("empty");
+  const totalItemsEl = document.getElementById("totalItems");
+
+  const originalRows = Array.from(tbodyEl.querySelectorAll("tr"));
+  const getPrice = (row) => {
+    const v = row.dataset.price || row.getAttribute("data-price") || "";
+    const s = String(v).replace(/\s+/g,"").replace("₽","").replace(",",".");
+    const n = Number(s);
+    return Number.isFinite(n) ? n : 0;
+  };
+
+  function applyFilter(){
+    const term = (q?.value || "").trim().toLowerCase();
+    const min = Number((minP?.value || "").replace(",", ".")) || 0;
+    const maxRaw = (maxP?.value || "").trim();
+    const max = maxRaw ? (Number(maxRaw.replace(",", ".")) || Infinity) : Infinity;
+
+    let shown = 0;
+    for (const row of originalRows){
+      const name = (row.dataset.name || "").toLowerCase();
+      const sku = (row.dataset.sku || "").toLowerCase();
+      const price = getPrice(row);
+
+      const okTerm = !term || name.includes(term) || sku.includes(term);
+      const okPrice = price >= min && price <= max;
+
+      const visible = okTerm && okPrice;
+      row.style.display = visible ? "" : "none";
+      if (visible) shown++;
+    }
+
+    if (totalItemsEl) totalItemsEl.textContent = String(shown);
+    if (emptyEl) emptyEl.style.display = shown ? "none" : "block";
+  }
+
+  function applySort(){
+    const mode = sort?.value || "none";
+    const rows = originalRows.slice();
+
+    const visible = rows.filter(r => r.style.display !== "none");
+    const hidden = rows.filter(r => r.style.display === "none");
+
+    if (mode === "price-asc"){
+      visible.sort((a,b)=>getPrice(a)-getPrice(b));
+    } else if (mode === "price-desc"){
+      visible.sort((a,b)=>getPrice(b)-getPrice(a));
+    } else if (mode === "name-asc"){
+      visible.sort((a,b)=>(a.dataset.name||"").localeCompare(b.dataset.name||"", "ru"));
+    } else if (mode === "name-desc"){
+      visible.sort((a,b)=>(b.dataset.name||"").localeCompare(a.dataset.name||"", "ru"));
+    } else {
+      // none: restore original order
+      tbodyEl.innerHTML = "";
+      originalRows.forEach(r => tbodyEl.appendChild(r));
+      return;
+    }
+
+    tbodyEl.innerHTML = "";
+    visible.forEach(r => tbodyEl.appendChild(r));
+    hidden.forEach(r => tbodyEl.appendChild(r));
+  }
+
+  function resetAll(){
+    if (q) q.value = "";
+    if (minP) minP.value = "";
+    if (maxP) maxP.value = "";
+    if (sort) sort.value = "none";
+    originalRows.forEach(r => r.style.display = "");
+    applyFilter();
+    applySort();
+  }
+
+  q?.addEventListener("input", applyFilter);
+  minP?.addEventListener("input", applyFilter);
+  maxP?.addEventListener("input", applyFilter);
+  sort?.addEventListener("change", applySort);
+  reset?.addEventListener("click", resetAll);
+
+  // init
+  applyFilter();
+})();
+</script>
+
+<script src="cart.js"></script>
+</body>
+</html>

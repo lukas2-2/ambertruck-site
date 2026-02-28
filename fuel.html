@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Топливная система — AmberTruck JM93</title>
+  <meta name="description" content="Каталог запчастей двигателя AmberTruck JM93. Поиск, фильтры, корзина." />
+  <style>
+    :root {
+      --bg:#f5f5f5;
+      --card:#ffffff;
+      --text:#222;
+      --muted:#6b7280;
+      --line:#e5e7eb;
+      --black:#000;
+      --radius:14px;
+      --shadow:0 10px 30px rgba(0,0,0,.08);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1100px;margin:0 auto;padding:0 16px;}
+    header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.92);backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid var(--line);}
+    .header-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;}
+    .brand{display:flex;flex-direction:column;gap:2px;}
+    .brand b{font-size:16px;letter-spacing:.2px}
+    .brand span{font-size:12px;color:var(--muted)}
+    .header-actions{display:flex;align-items:center;gap:10px;}
+    .btn{border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px 12px;font-weight:600;cursor:pointer}
+    .btn:hover{border-color:#cfd5dd}
+    .btn-dark{background:#000;color:#fff;border-color:#000;}
+    .btn-dark:hover{opacity:.92}
+    .cart-btn{display:flex;align-items:center;gap:8px;}
+    .badge{min-width:26px;height:22px;padding:0 8px;border-radius:999px;background:#111;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
+    main{padding:18px 0 40px}
+    h1{margin:10px 0 6px;font-size:22px}
+    .sub{color:var(--muted);font-size:13px}
+    .panel{margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:12px;}
+    .filters{display:grid;grid-template-columns: 1.4fr .6fr .6fr .7fr auto;gap:10px;align-items:center;}
+    .field{display:flex;flex-direction:column;gap:6px}
+    label{font-size:12px;color:var(--muted)}
+    input, select{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:12px;font-size:14px;background:#fff;outline:none}
+    input:focus, select:focus{border-color:#b8bec7}
+    .hint{font-size:12px;color:var(--muted);margin-top:10px}
+    .table-wrap{margin-top:12px;overflow:hidden;border-radius:var(--radius);border:1px solid var(--line);background:#fff;box-shadow:var(--shadow);}
+    table{width:100%;border-collapse:separate;border-spacing:0}
+    thead th{text-align:left;font-size:12px;color:var(--muted);padding:12px;border-bottom:1px solid var(--line);background:#fafafa;}
+    tbody td{padding:12px;border-bottom:1px solid var(--line);vertical-align:middle}
+    tbody tr:last-child td{border-bottom:none}
+    .col-price{white-space:nowrap;font-weight:700}
+    .buy-btn{border:1px solid #000;background:#000;color:#fff;border-radius:12px;padding:10px 12px;font-weight:700;cursor:pointer}
+    .buy-btn:hover{opacity:.92}
+    .empty{padding:20px;color:var(--muted);text-align:center}
+    /* Modal */
+    .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:flex-end;justify-content:center;z-index:50}
+    .modal{width:min(720px, 100%);background:#fff;border-radius:18px 18px 0 0;max-height:85vh;overflow:auto;box-shadow:0 -20px 60px rgba(0,0,0,.25);}
+    .modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line);position:sticky;top:0;background:#fff}
+    .modal-head h2{margin:0;font-size:16px}
+    .cart-list{padding:10px 16px}
+    .cart-item{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line)}
+    .cart-item:last-child{border-bottom:none}
+    .cart-item b{display:block;font-size:14px}
+    .cart-item small{color:var(--muted)}
+    .qty-controls{display:flex;align-items:center;gap:8px;white-space:nowrap}
+    .icon-btn{width:34px;height:34px;border-radius:10px;border:1px solid var(--line);background:#fff;cursor:pointer;font-weight:900}
+    .icon-btn:hover{border-color:#cfd5dd}
+    .total{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-top:1px solid var(--line);background:#fafafa}
+    footer{padding:18px 0;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
+    /* Mobile */
+    @media (max-width: 860px){
+      .filters{grid-template-columns:1fr 1fr;}
+    }
+    @media (max-width: 768px){
+      .header-row{flex-wrap:wrap}
+      .filters{grid-template-columns:1fr;}
+      table thead{display:none}
+      table, tbody, tr, td{display:block;width:100%}
+      tbody tr{border-bottom:1px solid var(--line);padding:8px 12px}
+      tbody tr:last-child{border-bottom:none}
+      tbody td{border:none;padding:8px 0;display:flex;align-items:center;justify-content:space-between;gap:12px}
+      tbody td::before{content:attr(data-label);color:var(--muted);font-size:12px;flex:0 0 auto}
+      .col-actions{justify-content:flex-end}
+      .modal-backdrop{align-items:flex-end}
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <div class="header-row">
+      <a class="brand" href="index.html" title="На главную">
+        <b>AmberTruck JM93</b>
+        <span>Запчасти • Категория: Топливная система</span>
+      </a>
+
+      <div class="header-actions">
+        <a class="btn" href="index.html">← Назад</a>
+        <a class="btn btn-dark cart-btn" href="cart.html">Корзина <span class="badge" id="cartCount">0</span></a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <h1>Запчасти топливной системы</h1>
+    <div class="sub">Товаров: <b id="totalItems">3</b> • Обновлено: 2026-02-27 23:34</div>
+
+    <div class="panel">
+      <div class="filters">
+        <div class="field">
+          <label for="q">Поиск по названию или артикулу</label>
+          <input id="q" type="search" placeholder="Например: прокладка, датчик, CN3..." autocomplete="off" />
+        </div>
+
+        <div class="field">
+          <label for="minP">Цена от</label>
+          <input id="minP" inputmode="numeric" placeholder="0" />
+        </div>
+
+        <div class="field">
+          <label for="maxP">Цена до</label>
+          <input id="maxP" inputmode="numeric" placeholder="999999" />
+        </div>
+
+        <div class="field">
+          <label for="sort">Сортировка</label>
+          <select id="sort">
+            <option value="default">Как в списке</option>
+            <option value="price_asc">Цена ↑</option>
+            <option value="price_desc">Цена ↓</option>
+            <option value="name_asc">Название А–Я</option>
+            <option value="name_desc">Название Я–А</option>
+          </select>
+        </div>
+
+        <button class="btn" id="reset" type="button" title="Сбросить фильтры">Сбросить</button>
+      </div>
+
+      <div class="hint">Совет: можно вводить часть артикула — фильтрация срабатывает сразу.</div>
+    </div>
+
+    <div class="table-wrap">
+      <table id="itemsTable">
+        <thead>
+          <tr>
+            <th style="width:55%">Название</th>
+            <th style="width:18%">Артикул</th>
+            <th style="width:15%">Цена</th>
+            <th style="width:12%"></th>
+          </tr>
+        </thead>
+        <tbody id="tbody">
+<tr class="item-row" data-name="ТНВД в сборе" data-sku="FS1-1234-AA" data-price="94500.00">
+<td class="col-name" data-label="Название">ТНВД в сборе</td>
+<td class="col-sku" data-label="Артикул">FS1-1234-AA</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="94500.00">94 500 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="ТНВД в сборе" data-sku="FS1-1234-AA" data-price="94500.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Форсунка топливная" data-sku="FS1-2234-AB" data-price="18900.00">
+<td class="col-name" data-label="Название">Форсунка топливная</td>
+<td class="col-sku" data-label="Артикул">FS1-2234-AB</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="18900.00">18 900 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Форсунка топливная" data-sku="FS1-2234-AB" data-price="18900.00">В корзину</button>
+</td>
+</tr>
+
+<tr class="item-row" data-name="Топливный фильтр" data-sku="FS1-3234-AC" data-price="1680.00">
+<td class="col-name" data-label="Название">Топливный фильтр</td>
+<td class="col-sku" data-label="Артикул">FS1-3234-AC</td>
+<td class="col-price" data-label="Цена"><span class="price" data-price="1680.00">1 680 ₽</span></td>
+<td class="col-actions" data-label="Действие">
+<button class="buy-btn" type="button" data-name="Топливный фильтр" data-sku="FS1-3234-AC" data-price="1680.00">В корзину</button>
+</td>
+</tr>
+</tbody>
+      </table>
+      <div class="empty" id="empty" style="display:none;">Ничего не найдено. Попробуй изменить фильтры.</div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">© 2024 AmberTruck JM93. Локальная корзина в браузере (не стирается при переходах между категориями).</div>
+</footer>
+
+<!-- Cart Modal -->
+<div class="modal-backdrop" id="cartBackdrop" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-label="Корзина">
+    <div class="modal-head">
+      <h2>Корзина</h2>
+      <button class="btn" id="closeCart" type="button">Закрыть</button>
+    </div>
+
+    <div class="cart-list" id="cartList"></div>
+
+    <div class="total">
+      <div>Итого: <b id="cartTotal">0 ₽</b></div>
+      <button class="btn" id="clearCart" type="button">Очистить</button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+(function(){
+  const tbodyEl = document.getElementById("tbody") || document.querySelector("#itemsTable tbody");
+  if (!tbodyEl) return;
+
+  const q = document.getElementById("q");
+  const minP = document.getElementById("minP");
+  const maxP = document.getElementById("maxP");
+  const sort = document.getElementById("sort");
+  const reset = document.getElementById("reset");
+  const emptyEl = document.getElementById("empty");
+  const totalItemsEl = document.getElementById("totalItems");
+
+  const originalRows = Array.from(tbodyEl.querySelectorAll("tr"));
+  const getPrice = (row) => {
+    const v = row.dataset.price || row.getAttribute("data-price") || "";
+    const s = String(v).replace(/\s+/g,"").replace("₽","").replace(",",".");
+    const n = Number(s);
+    return Number.isFinite(n) ? n : 0;
+  };
+
+  function applyFilter(){
+    const term = (q?.value || "").trim().toLowerCase();
+    const min = Number((minP?.value || "").replace(",", ".")) || 0;
+    const maxRaw = (maxP?.value || "").trim();
+    const max = maxRaw ? (Number(maxRaw.replace(",", ".")) || Infinity) : Infinity;
+
+    let shown = 0;
+    for (const row of originalRows){
+      const name = (row.dataset.name || "").toLowerCase();
+      const sku = (row.dataset.sku || "").toLowerCase();
+      const price = getPrice(row);
+
+      const okTerm = !term || name.includes(term) || sku.includes(term);
+      const okPrice = price >= min && price <= max;
+
+      const visible = okTerm && okPrice;
+      row.style.display = visible ? "" : "none";
+      if (visible) shown++;
+    }
+
+    if (totalItemsEl) totalItemsEl.textContent = String(shown);
+    if (emptyEl) emptyEl.style.display = shown ? "none" : "block";
+  }
+
+  function applySort(){
+    const mode = sort?.value || "none";
+    const rows = originalRows.slice();
+
+    const visible = rows.filter(r => r.style.display !== "none");
+    const hidden = rows.filter(r => r.style.display === "none");
+
+    if (mode === "price-asc"){
+      visible.sort((a,b)=>getPrice(a)-getPrice(b));
+    } else if (mode === "price-desc"){
+      visible.sort((a,b)=>getPrice(b)-getPrice(a));
+    } else if (mode === "name-asc"){
+      visible.sort((a,b)=>(a.dataset.name||"").localeCompare(b.dataset.name||"", "ru"));
+    } else if (mode === "name-desc"){
+      visible.sort((a,b)=>(b.dataset.name||"").localeCompare(a.dataset.name||"", "ru"));
+    } else {
+      // none: restore original order
+      tbodyEl.innerHTML = "";
+      originalRows.forEach(r => tbodyEl.appendChild(r));
+      return;
+    }
+
+    tbodyEl.innerHTML = "";
+    visible.forEach(r => tbodyEl.appendChild(r));
+    hidden.forEach(r => tbodyEl.appendChild(r));
+  }
+
+  function resetAll(){
+    if (q) q.value = "";
+    if (minP) minP.value = "";
+    if (maxP) maxP.value = "";
+    if (sort) sort.value = "none";
+    originalRows.forEach(r => r.style.display = "");
+    applyFilter();
+    applySort();
+  }
+
+  q?.addEventListener("input", applyFilter);
+  minP?.addEventListener("input", applyFilter);
+  maxP?.addEventListener("input", applyFilter);
+  sort?.addEventListener("change", applySort);
+  reset?.addEventListener("click", resetAll);
+
+  // init
+  applyFilter();
+})();
+</script>
+
+<script src="cart.js"></script>
+</body>
+</html>

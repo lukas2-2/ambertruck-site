@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Трансмиссия — AmberTruck JM93</title>
+  <meta name="description" content="Каталог запчастей трансмиссии AmberTruck JM93. Поиск, фильтры, корзина." />
+  <style>
+    :root {
+      --bg:#f5f5f5;
+      --card:#ffffff;
+      --text:#222;
+      --muted:#6b7280;
+      --line:#e5e7eb;
+      --black:#000;
+      --radius:14px;
+      --shadow:0 10px 30px rgba(0,0,0,.08);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1100px;margin:0 auto;padding:0 16px;}
+    header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.92);backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid var(--line);}
+    .header-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;}
+    .brand{display:flex;flex-direction:column;gap:2px;}
+    .brand b{font-size:16px;letter-spacing:.2px}
+    .brand span{font-size:12px;color:var(--muted)}
+    .header-actions{display:flex;align-items:center;gap:10px;}
+    .btn{border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px 12px;font-weight:600;cursor:pointer}
+    .btn:hover{border-color:#cfd5dd}
+    .btn-dark{background:#000;color:#fff;border-color:#000;}
+    .btn-dark:hover{opacity:.92}
+    .cart-btn{display:flex;align-items:center;gap:8px;}
+    .badge{min-width:26px;height:22px;padding:0 8px;border-radius:999px;background:#111;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
+    main{padding:18px 0 40px}
+    h1{margin:10px 0 6px;font-size:22px}
+    .sub{color:var(--muted);font-size:13px}
+    .panel{margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:12px;}
+    .filters{display:grid;grid-template-columns: 1.4fr .6fr .6fr .7fr auto;gap:10px;align-items:center;}
+    .field{display:flex;flex-direction:column;gap:6px}
+    label{font-size:12px;color:var(--muted)}
+    input, select{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:12px;font-size:14px;background:#fff;outline:none}
+    input:focus, select:focus{border-color:#b8bec7}
+    .hint{font-size:12px;color:var(--muted);margin-top:10px}
+    .table-wrap{margin-top:12px;overflow:hidden;border-radius:var(--radius);border:1px solid var(--line);background:#fff;box-shadow:var(--shadow);}
+    table{width:100%;border-collapse:separate;border-spacing:0}
+    thead th{text-align:left;font-size:12px;color:var(--muted);padding:12px;border-bottom:1px solid var(--line);background:#fafafa;}
+    tbody td{padding:12px;border-bottom:1px solid var(--line);vertical-align:middle}
+    tbody tr:last-child td{border-bottom:none}
+    .col-price{white-space:nowrap;font-weight:700}
+    .buy-btn{border:1px solid #000;background:#000;color:#fff;border-radius:12px;padding:10px 12px;font-weight:700;cursor:pointer}
+    .buy-btn:hover{opacity:.92}
+    .empty{padding:20px;color:var(--muted);text-align:center}
+    /* Modal */
+    .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:flex-end;justify-content:center;z-index:50}
+    .modal{width:min(720px, 100%);background:#fff;border-radius:18px 18px 0 0;max-height:85vh;overflow:auto;box-shadow:0 -20px 60px rgba(0,0,0,.25);}
+    .modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line);position:sticky;top:0;background:#fff}
+    .modal-head h2{margin:0;font-size:16px}
+    .cart-list{padding:10px 16px}
+    .cart-item{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line)}
+    .cart-item:last-child{border-bottom:none}
+    .cart-item b{display:block;font-size:14px}
+    .cart-item small{color:var(--muted)}
+    .qty-controls{display:flex;align-items:center;gap:8px;white-space:nowrap}
+    .icon-btn{width:34px;height:34px;border-radius:10px;border:1px solid var(--line);background:#fff;cursor:pointer;font-weight:900}
+    .icon-btn:hover{border-color:#cfd5dd}
+    .total{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-top:1px solid var(--line);background:#fafafa}
+    footer{padding:18px 0;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
+    /* Mobile */
+    @media (max-width: 860px){
+      .filters{grid-template-columns:1fr 1fr;}
+    }
+    @media (max-width: 768px){
+      .header-row{flex-wrap:wrap}
+      .filters{grid-template-columns:1fr;}
+      table thead{display:none}
+      table, tbody, tr, td{display:block;width:100%}
+      tbody tr{border-bottom:1px solid var(--line);padding:8px 12px}
+      tbody tr:last-child{border-bottom:none}
+      tbody td{border:none;padding:8px 0;display:flex;align-items:center;justify-content:space-between;gap:12px}
+      tbody td::before{content:attr(data-label);color:var(--muted);font-size:12px;flex:0 0 auto}
+      .col-actions{justify-content:flex-end}
+      .modal-backdrop{align-items:flex-end}
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <div class="header-row">
+      <a class="brand" href="index.html" title="На главную">
+        <b>AmberTruck JM93</b>
+        <span>Запчасти • Категория: Трансмиссия</span>
+      </a>
+
+      <div class="header-actions">
+        <a class="btn" href="index.html">← Назад</a>
+        <a class="btn btn-dark cart-btn" href="cart.html">Корзина <span class="badge" id="cartCount">0</span></a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <h1>Запчасти трансмиссии</h1>
+    <div class="sub">Товаров: <b id="totalItems">22</b> • Обновлено: 2026-02-27 23:34</div>
+
+    <div class="panel">
+      <div class="filters">
+        <div class="field">
+          <label for="q">Поиск по названию или артикулу</label>
+          <input id="q" type="search" placeholder="Например: прокладка, датчик, CN3..." autocomplete="off" />
+        </div>
+
+        <div class="field">
+          <label for="minP">Цена от</label>
+          <input id="minP" inputmode="numeric" placeholder="0" />
+        </div>
+
+        <div class="field">
+          <label for="maxP">Цена до</label>
+          <input id="maxP" inputmode="numeric" placeholder="999999" />
+        </div>
+
+        <div class="field">
+          <label for="sort">Сортировка</label>
+          <select id="sort">
+            <option value="default">Как в списке</option>
+            <option value="price_asc">Цена ↑</option>
+            <option value="price_desc">Цена ↓</option>
+            <option value="name_asc">Название А–Я</option>
+            <option value="name_desc">Название Я–А</option>
+          </select>
+        </div>
+
+        <button class="btn" id="reset" type="button" title="Сбросить фильтры">Сбросить</button>
+      </div>
+
+      <div class="hint">Совет: можно вводить часть артикула — фильтрация срабатывает сразу.</div>
+    </div>
+
+    <div class="table-wrap">
+      <table id="itemsTable">
+        <thead>
+          <tr>
+            <th style="width:55%">Название</th>
+            <th style="width:18%">Артикул</th>
+            <th style="width:15%">Цена</th>
+            <th style="width:12%"></th>
+          </tr>
+        </thead>
+        <tbody id="tbody">
+          
+          <tr class="item-row" data-name="Сальник ведущей шестерни" data-sku="2400000161W" data-price="3360.00">
+          <td class="col-name" data-label="Название">Сальник ведущей шестерни</td>
+          <td class="col-sku" data-label="Артикул">2400000161W</td>
+          <td class="col-price" data-label="Цена"><span class="price" data-price="3360.00">3 360 ₽</span></td>
+          <td class="col-actions" data-label="Действие">
+            <button class="buy-btn" type="button" data-name="Сальник ведущей шестерни" data-sku="2400000161W" data-price="3360.00">В корзину</button>
+          </td>
+        </tr>
+          <tr class="item-row" data-name="Подшипник промежуточного вала" data-sku="2580/2520A1" data-price="5670.00">
+          <td class="col-name" data-label="Название">Подшипник промежуточного вала</td>
+          <td class="col-sku" data-label="Артикул">2580/2520A1</td>
+          <td class="col-price" data-label="Цена"><span class="price" data-price="5670.00">5 670 ₽</span></td>
+          <td class="col-actions" data-label="Действие">
+            <button class="buy-btn" type="button" data-name="Подшипник промежуточного вала" data-sku="2580/2520A1" data-price="5670.00">В корзину</button>
+          </td>
+        </tr>
+          <tr class="item-row" data-name="Переключатель коробки отбора мощности AT JM" data-sku="3713200AB5" data-price="1890.00">
+          <td class="col-name" data-label="Название">Переключатель коробки отбора мощности AT JM</td>
+          <td class="col-sku" data-label="Артикул">3713200AB5</td>
+          <td class="col-price" data-label="Цена"><span class="price" data-price="1890.00">1 890 ₽</span></td>
+          <td class="col-actions" data-label="Действие">
+            <button class="buy-btn" type="button" data-name="Переключатель коробки отбора мощности AT JM" data-sku="3713200AB5" data-price="1890.00">В корзину</button>
+          </td>
+        </tr>
+          <tr class="item-row" data-name="Подшипник маховика" data-sku="6005-2Z-GB276" data-price="2310.00">
+          <td class="col-name" data-label="Название">Подшипник маховика</td>
+          <td class="col-sku" data-label="Артикул">6005-2Z-GB276</td>
+          <td class="col-price" data-label="Цена"><span class="price" data-price="2310.00">2 310 ₽</span></td>
+          <td class="col-actions" data-label="Действие">
+            <button class="buy-btn" type="button" data-name="Подшипник маховика" data-sku="6005-2Z-GB276" data-price="2310.00">В корзину</button>
+          </td>
+        </tr>
+          <tr class="item-row" data-name="Промежуточный вал четвертой передачи" data-sku="6G40-2411" data-price="18060.00">
+          <td class="col-name" data-label="Название">Промежуточный вал четвертой передачи</td>
+          <td class="col-sku" data-label="Артикул">6G40-2411</td>
+          <td class="col-price" data-label="Цена"><span class="price" data-price="18060.00">18 060 ₽</span></td>
+          <td class="col-actions" data-label="Действие">
+            <button class="buy-btn" type="button" data-name="Промежуточный вал четвертой передачи" data-sku="6G40-2411" data-price="18060.00">В корзину</button>
+          </td>
+        </tr>
+          <tr class="item-row" data-name="Промежуточный вал пятой передачи" data-sku="6G40-2511" data-price="25200.00">
+          <td class="col-name" data-label="Название">Промежуточный вал пятой передачи</td>
+          <td class="col-sku" data-label="Артикул">6G40-2511</td>
+          <td class="col-price" data-label="Цена"><span class="price" data-price="25200.00">25 200 ₽</span></td>
+          <td class="col-actions" data-label="Действие">
+            <button class="buy-btn" type="button" data-name="Промежуточный вал пятой передачи" data-sku="6G40-2511" data-price="25200.00">В корзину</button>
+          </td>
+        </tr>
+          <tr class="item-row" data-name="Вал выходной" data-sku="6G40-3011A1" data-price="47250.00">
+          <td class="col-name" data-label="Название">Вал выходной</td>
+          <td class="col-sku" data-label="Артикул">6G40-3011A1</td>
+          <td class="col-price" data-label="Цена"><span class="price" data-price="47250.00">47 250 ₽</span></td>
+          <td class="col-actions" data-label="Действие">
+            <button class="buy-btn" type="button" data-name="Вал выходной" data-sku="6G40-3011A1" data-price="47250.00">В корзину</button>
+          </td>
+        </tr>
+          <tr class="item-row" data-name="Синхронизатор 3-4 передачи" data-sku="6G40-3360A1" data-price="79380.00">
+          <td class="col-name" data-label="Название">Синхронизатор 3-4 передачи</td>
+          <td class="col-sku" data-label="Артикул">6G40-3360A1</td>
+          <td class="col-price" data-label="Цена"><span class="price" data-price="79380.00">79 380 ₽</span></td>
+          <td class="col-actions" data-label="Действие">
+            <button class="buy-btn" type="button" data-name="Синхронизатор 3-4 передачи" data-sku="6G40-3360A1" data-price="79380.00">В корзину</button>
+          </td>
+        </tr>
+          <tr class="item-row" data-name="Шестерня выходного вала 4" data-sku="6G40-3411A3" data-price="18900.00">
+          <td class="col-name" data-label="Название">Шестерня выходного вала 4</td>
+          <td class="col-sku" data-label="Артикул">6G40-3411A3</td>
+          <td class="col-price" data-label="Цена"><span class="price" data-price="18900.00">18 900 ₽</span></td>
+          <td class="col-actions" data-label="Действие">
+            <button class="buy-btn" type="button" data-name="Шестерня выходного вала 4" data-sku="6G40-3411A3" data-price="18900.00">В корзину</button>
+          </td>
+        </tr>
+          <tr class="item-row" data-name="Вал вилки первой и второй передач" data-sku="6G40-6171A2" data-price="5880.00">
+          <td class="col-name" data-label="Название">Вал вилки первой и второй передач</td>
+          <td class="col-sku" data-label="Артикул">6G40-6171A2</td>
+          <td class="col-price" data-label="Цена"><span class="price" data-price="5880.00">5 880 ₽</span></td>
+          <td class="col-actions" data-label="Действие">
+            <button class="buy-btn" type="button" data-name="Вал вилки первой и второй передач" data-sku="6G40-6171A2" data-price="5880.00">В корзину</button>
+          </td>
+        </tr>
+          <tr class="item-row" data-name="Промежуточный вал шестой передачи" data-sku="6G45-2611" data-price="29820.00">
+          <td class="col-name" data-label="Название">Промежуточный вал шестой передачи</td>
+          <td class="col-sku" data-label="Артикул">6G45-2611</td>
+          <td class="col-price" data-label="Цена"><span class="price" data-price="29820.00">29 820 ₽</span></td>
+          <td class="col-actions" data-label="Действие">
+            <button class="buy-btn" type="button" data-name="Промежуточный вал шестой передачи" data-sku="6G45-2611" data-price="29820.00">В корзину</button>
+          </td>
+        </tr>
+          <tr class="item-row" data-name="Шестерня выходного вала 6" data-sku="6G45-3610A5" data-price="18060.00">
+          <td class="col-name" data-label="Название">Шестерня выходного вала 6</td>
+          <td class="col-sku" data-label="Артикул">6G45-3610A5</td>
+          <td class="col-price" data-label="Цена"><span class="price" data-price="18060.00">18 060 ₽</span></td>
+          <td class="col-actions" data-label="Действие">
+            <button class="buy-btn" type="button" data-name="Шестерня выходного вала 6" data-sku="6G45-3610A5" data-price="18060.00">В корзину</button>
+          </td>
+        </tr>
+          <tr class="item-row" data-name="Синхронизатор 5-6 передачи" data-sku="6TS40-3560" data-price="44520.00">
+          <td class="col-name" data-label="Название">Синхронизатор 5-6 передачи</td>
+          <td class="col-sku" data-label="Артикул">6TS40-3560</td>
+          <td class="col-price" data-label="Цена"><span class="price" data-price="44520.00">44 520 ₽</span></td>
+          <td class="col-actions" data-label="Действие">
+            <button class="buy-btn" type="button" data-name="Синхронизатор 5-6 передачи" data-sku="6TS40-3560" data-price="44520.00">В корзину</button>
+          </td>
+        </tr>
+          <tr class="item-row" data-name="Шестерня вала" data-sku="6TS40-3561" data-price="4830.00">
+          <td class="col-name" data-label="Название">Шестерня вала</td>
+          <td class="col-sku" data-label="Артикул">6TS40-3561</td>
+          <td class="col-price" data-label="Цена"><span class="price" data-price="4830.00">4 830 ₽</span></td>
+          <td class="col-actions" data-label="Действие">
+            <button class="buy-btn" type="button" data-name="Шестерня вала" data-sku="6TS40-3561" data-price="4830.00">В корзину</button>
+          </td>
+        </tr>
+          <tr class="item-row" data-name="Трос коробки отбора мощности AT JM" data-sku="HWP-S100" data-price="11760.00">
+          <td class="col-name" data-label="Название">Трос коробки отбора мощности AT JM</td>
+          <td class="col-sku" data-label="Артикул">HWP-S100</td>
+          <td class="col-price" data-label="Цена"><span class="price" data-price="11760.00">11 760 ₽</span></td>
+          <td class="col-actions" data-label="Действие">
+            <button class="buy-btn" type="button" data-name="Трос коробки отбора мощности AT JM" data-sku="HWP-S100" data-price="11760.00">В корзину</button>
+          </td>
+        </tr>
+          <tr class="item-row" data-name="Коробка отбора мощности AT JM" data-sku="HWP-W31-39CHS" data-price="68460.00">
+          <td class="col-name" data-label="Название">Коробка отбора мощности AT JM</td>
+          <td class="col-sku" data-label="Артикул">HWP-W31-39CHS</td>
+          <td class="col-price" data-label="Цена"><span class="price" data-price="68460.00">68 460 ₽</span></td>
+          <td class="col-actions" data-label="Действие">
+            <button class="buy-btn" type="button" data-name="Коробка отбора мощности AT JM" data-sku="HWP-W31-39CHS" data-price="68460.00">В корзину</button>
+          </td>
+        </tr>
+          <tr class="item-row" data-name="Подшипник игольчатый" data-sku="K304027" data-price="1680.00">
+          <td class="col-name" data-label="Название">Подшипник игольчатый</td>
+          <td class="col-sku" data-label="Артикул">K304027</td>
+          <td class="col-price" data-label="Цена"><span class="price" data-price="1680.00">1 680 ₽</span></td>
+          <td class="col-actions" data-label="Действие">
+            <button class="buy-btn" type="button" data-name="Подшипник игольчатый" data-sku="K304027" data-price="1680.00">В корзину</button>
+          </td>
+        </tr>
+          <tr class="item-row" data-name="Подшипник игольчатый" data-sku="K485430" data-price="1470.00">
+          <td class="col-name" data-label="Название">Подшипник игольчатый</td>
+          <td class="col-sku" data-label="Артикул">K485430</td>
+          <td class="col-price" data-label="Цена"><span class="price" data-price="1470.00">1 470 ₽</span></td>
+          <td class="col-actions" data-label="Действие">
+            <button class="buy-btn" type="button" data-name="Подшипник игольчатый" data-sku="K485430" data-price="1470.00">В корзину</button>
+          </td>
+        </tr>
+          <tr class="item-row" data-name="Маховик" data-sku="KN3-6375-AA" data-price="34860.00">
+          <td class="col-name" data-label="Название">Маховик</td>
+          <td class="col-sku" data-label="Артикул">KN3-6375-AA</td>
+          <td class="col-price" data-label="Цена"><span class="price" data-price="34860.00">34 860 ₽</span></td>
+          <td class="col-actions" data-label="Действие">
+            <button class="buy-btn" type="button" data-name="Маховик" data-sku="KN3-6375-AA" data-price="34860.00">В корзину</button>
+          </td>
+        </tr>
+          <tr class="item-row" data-name="Педаль сцепления" data-sku="MN6-7B633-AC" data-price="10710.00">
+          <td class="col-name" data-label="Название">Педаль сцепления</td>
+          <td class="col-sku" data-label="Артикул">MN6-7B633-AC</td>
+          <td class="col-price" data-label="Цена"><span class="price" data-price="10710.00">10 710 ₽</span></td>
+          <td class="col-actions" data-label="Действие">
+            <button class="buy-btn" type="button" data-name="Педаль сцепления" data-sku="MN6-7B633-AC" data-price="10710.00">В корзину</button>
+          </td>
+        </tr>
+          <tr class="item-row" data-name="Подшипник 6-ой передачи игольчатый" data-sku="WBK36X41X29" data-price="1680.00">
+          <td class="col-name" data-label="Название">Подшипник 6-ой передачи игольчатый</td>
+          <td class="col-sku" data-label="Артикул">WBK36X41X29</td>
+          <td class="col-price" data-label="Цена"><span class="price" data-price="1680.00">1 680 ₽</span></td>
+          <td class="col-actions" data-label="Действие">
+            <button class="buy-btn" type="button" data-name="Подшипник 6-ой передачи игольчатый" data-sku="WBK36X41X29" data-price="1680.00">В корзину</button>
+          </td>
+        </tr>
+          <tr class="item-row" data-name="Регулятор 5-й и 6-й передач" data-sku="WTB10X21X10-6G60" data-price="2100.00">
+          <td class="col-name" data-label="Название">Регулятор 5-й и 6-й передач</td>
+          <td class="col-sku" data-label="Артикул">WTB10X21X10-6G60</td>
+          <td class="col-price" data-label="Цена"><span class="price" data-price="2100.00">2 100 ₽</span></td>
+          <td class="col-actions" data-label="Действие">
+            <button class="buy-btn" type="button" data-name="Регулятор 5-й и 6-й передач" data-sku="WTB10X21X10-6G60" data-price="2100.00">В корзину</button>
+          </td>
+        </tr>
+        
+        </tbody>
+      </table>
+      <div class="empty" id="empty" style="display:none;">Ничего не найдено. Попробуй изменить фильтры.</div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">© 2024 AmberTruck JM93. Локальная корзина в браузере (не стирается при переходах между категориями).</div>
+</footer>
+
+<!-- Cart Modal -->
+<div class="modal-backdrop" id="cartBackdrop" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-label="Корзина">
+    <div class="modal-head">
+      <h2>Корзина</h2>
+      <button class="btn" id="closeCart" type="button">Закрыть</button>
+    </div>
+
+    <div class="cart-list" id="cartList"></div>
+
+    <div class="total">
+      <div>Итого: <b id="cartTotal">0 ₽</b></div>
+      <button class="btn" id="clearCart" type="button">Очистить</button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+(function(){
+  const tbodyEl = document.getElementById("tbody") || document.querySelector("#itemsTable tbody");
+  if (!tbodyEl) return;
+
+  const q = document.getElementById("q");
+  const minP = document.getElementById("minP");
+  const maxP = document.getElementById("maxP");
+  const sort = document.getElementById("sort");
+  const reset = document.getElementById("reset");
+  const emptyEl = document.getElementById("empty");
+  const totalItemsEl = document.getElementById("totalItems");
+
+  const originalRows = Array.from(tbodyEl.querySelectorAll("tr"));
+  const getPrice = (row) => {
+    const v = row.dataset.price || row.getAttribute("data-price") || "";
+    const s = String(v).replace(/\s+/g,"").replace("₽","").replace(",",".");
+    const n = Number(s);
+    return Number.isFinite(n) ? n : 0;
+  };
+
+  function applyFilter(){
+    const term = (q?.value || "").trim().toLowerCase();
+    const min = Number((minP?.value || "").replace(",", ".")) || 0;
+    const maxRaw = (maxP?.value || "").trim();
+    const max = maxRaw ? (Number(maxRaw.replace(",", ".")) || Infinity) : Infinity;
+
+    let shown = 0;
+    for (const row of originalRows){
+      const name = (row.dataset.name || "").toLowerCase();
+      const sku = (row.dataset.sku || "").toLowerCase();
+      const price = getPrice(row);
+
+      const okTerm = !term || name.includes(term) || sku.includes(term);
+      const okPrice = price >= min && price <= max;
+
+      const visible = okTerm && okPrice;
+      row.style.display = visible ? "" : "none";
+      if (visible) shown++;
+    }
+
+    if (totalItemsEl) totalItemsEl.textContent = String(shown);
+    if (emptyEl) emptyEl.style.display = shown ? "none" : "block";
+  }
+
+  function applySort(){
+    const mode = sort?.value || "none";
+    const rows = originalRows.slice();
+
+    const visible = rows.filter(r => r.style.display !== "none");
+    const hidden = rows.filter(r => r.style.display === "none");
+
+    if (mode === "price-asc"){
+      visible.sort((a,b)=>getPrice(a)-getPrice(b));
+    } else if (mode === "price-desc"){
+      visible.sort((a,b)=>getPrice(b)-getPrice(a));
+    } else if (mode === "name-asc"){
+      visible.sort((a,b)=>(a.dataset.name||"").localeCompare(b.dataset.name||"", "ru"));
+    } else if (mode === "name-desc"){
+      visible.sort((a,b)=>(b.dataset.name||"").localeCompare(a.dataset.name||"", "ru"));
+    } else {
+      // none: restore original order
+      tbodyEl.innerHTML = "";
+      originalRows.forEach(r => tbodyEl.appendChild(r));
+      return;
+    }
+
+    tbodyEl.innerHTML = "";
+    visible.forEach(r => tbodyEl.appendChild(r));
+    hidden.forEach(r => tbodyEl.appendChild(r));
+  }
+
+  function resetAll(){
+    if (q) q.value = "";
+    if (minP) minP.value = "";
+    if (maxP) maxP.value = "";
+    if (sort) sort.value = "none";
+    originalRows.forEach(r => r.style.display = "");
+    applyFilter();
+    applySort();
+  }
+
+  q?.addEventListener("input", applyFilter);
+  minP?.addEventListener("input", applyFilter);
+  maxP?.addEventListener("input", applyFilter);
+  sort?.addEventListener("change", applySort);
+  reset?.addEventListener("click", resetAll);
+
+  // init
+  applyFilter();
+})();
+</script>
+
+<script src="cart.js"></script>
+</body>
+</html>

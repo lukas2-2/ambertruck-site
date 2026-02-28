@@ -1,0 +1,770 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Электрика — AmberTruck JM93</title>
+  <meta name="description" content="Каталог запчастей электрики AmberTruck JM93. Поиск, фильтры, корзина и оформление заказа." />
+  <style>
+    :root {
+      --bg:#f5f5f5;
+      --card:#ffffff;
+      --text:#222;
+      --muted:#6b7280;
+      --line:#e5e7eb;
+      --black:#000;
+      --radius:14px;
+      --shadow:0 10px 30px rgba(0,0,0,.08);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1100px;margin:0 auto;padding:0 16px;}
+    header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.92);backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid var(--line);}
+    .header-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;}
+    .brand{display:flex;flex-direction:column;gap:2px;}
+    .brand b{font-size:16px;letter-spacing:.2px}
+    .brand span{font-size:12px;color:var(--muted)}
+    .header-actions{display:flex;align-items:center;gap:10px;}
+    .btn{border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px 12px;font-weight:600;cursor:pointer}
+    .btn:hover{border-color:#cfd5dd}
+    .btn-dark{background:#000;color:#fff;border-color:#000;}
+    .btn-dark:hover{opacity:.92}
+    .cart-btn{display:flex;align-items:center;gap:8px;}
+    .badge{min-width:26px;height:22px;padding:0 8px;border-radius:999px;background:#111;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
+    main{padding:18px 0 40px}
+    h1{margin:10px 0 6px;font-size:22px}
+    .sub{color:var(--muted);font-size:13px}
+    .panel{margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:12px;}
+    .filters{display:grid;grid-template-columns: 1.4fr .6fr .6fr .7fr auto;gap:10px;align-items:center;}
+    .field{display:flex;flex-direction:column;gap:6px}
+    label{font-size:12px;color:var(--muted)}
+    input, select{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:12px;font-size:14px;background:#fff;outline:none}
+    input:focus, select:focus{border-color:#b8bec7}
+    .hint{font-size:12px;color:var(--muted);margin-top:10px}
+    .table-wrap{margin-top:12px;overflow:hidden;border-radius:var(--radius);border:1px solid var(--line);background:#fff;box-shadow:var(--shadow);}
+    table{width:100%;border-collapse:separate;border-spacing:0}
+    thead th{text-align:left;font-size:12px;color:var(--muted);padding:12px;border-bottom:1px solid var(--line);background:#fafafa;}
+    tbody td{padding:12px;border-bottom:1px solid var(--line);vertical-align:middle}
+    tbody tr:last-child td{border-bottom:none}
+    .col-price{white-space:nowrap;font-weight:700}
+    .buy-btn{border:1px solid #000;background:#000;color:#fff;border-radius:12px;padding:10px 12px;font-weight:700;cursor:pointer}
+    .buy-btn:hover{opacity:.92}
+    .empty{padding:20px;color:var(--muted);text-align:center}
+    /* Modal */
+    .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:flex-end;justify-content:center;z-index:50}
+    .modal{width:min(720px, 100%);background:#fff;border-radius:18px 18px 0 0;max-height:85vh;overflow:auto;box-shadow:0 -20px 60px rgba(0,0,0,.25);}
+    .modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line);position:sticky;top:0;background:#fff}
+    .modal-head h2{margin:0;font-size:16px}
+    .cart-list{padding:10px 16px}
+    .cart-item{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line)}
+    .cart-item:last-child{border-bottom:none}
+    .cart-item b{display:block;font-size:14px}
+    .cart-item small{color:var(--muted)}
+    .qty-controls{display:flex;align-items:center;gap:8px;white-space:nowrap}
+    .icon-btn{width:34px;height:34px;border-radius:10px;border:1px solid var(--line);background:#fff;cursor:pointer;font-weight:900}
+    .icon-btn:hover{border-color:#cfd5dd}
+    .total{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-top:1px solid var(--line);background:#fafafa}
+    footer{padding:18px 0;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
+    /* Mobile */
+    @media (max-width: 860px){
+      .filters{grid-template-columns:1fr 1fr;}
+    }
+    @media (max-width: 768px){
+      .header-row{flex-wrap:wrap}
+      .filters{grid-template-columns:1fr;}
+      table thead{display:none}
+      table, tbody, tr, td{display:block;width:100%}
+      tbody tr{border-bottom:1px solid var(--line);padding:8px 12px}
+      tbody tr:last-child{border-bottom:none}
+      tbody td{border:none;padding:8px 0;display:flex;align-items:center;justify-content:space-between;gap:12px}
+      tbody td::before{content:attr(data-label);color:var(--muted);font-size:12px;flex:0 0 auto}
+      .col-actions{justify-content:flex-end}
+      .modal-backdrop{align-items:flex-end}
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <div class="header-row">
+      <a class="brand" href="index.html" title="На главную">
+        <b>AmberTruck JM93</b>
+        <span>Запчасти • Категория: Электрика</span>
+      </a>
+
+      <div class="header-actions">
+        <a class="btn" href="index.html">← Назад</a>
+        <button class="btn btn-dark cart-btn" id="openCart" type="button">
+          Корзина <span class="badge" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <h1>Запчасти электрики</h1>
+    <div class="sub">Товаров: <b id="totalItems">62</b> • Обновлено: 2026-02-27 23:34</div>
+
+    <div class="panel">
+      <div class="filters">
+        <div class="field">
+          <label for="q">Поиск по названию или артикулу</label>
+          <input id="q" type="search" placeholder="Например: прокладка, датчик, CN3..." autocomplete="off" />
+        </div>
+
+        <div class="field">
+          <label for="minP">Цена от</label>
+          <input id="minP" inputmode="numeric" placeholder="0" />
+        </div>
+
+        <div class="field">
+          <label for="maxP">Цена до</label>
+          <input id="maxP" inputmode="numeric" placeholder="999999" />
+        </div>
+
+        <div class="field">
+          <label for="sort">Сортировка</label>
+          <select id="sort">
+            <option value="default">Как в списке</option>
+            <option value="price_asc">Цена ↑</option>
+            <option value="price_desc">Цена ↓</option>
+            <option value="name_asc">Название А–Я</option>
+            <option value="name_desc">Название Я–А</option>
+          </select>
+        </div>
+
+        <button class="btn" id="reset" type="button" title="Сбросить фильтры">Сбросить</button>
+      </div>
+
+      <div class="hint">Совет: можно вводить часть артикула — фильтрация срабатывает сразу.</div>
+    </div>
+
+    <div class="table-wrap">
+      <table id="itemsTable">
+        <thead>
+          <tr>
+            <th style="width:55%">Название</th>
+            <th style="width:18%">Артикул</th>
+            <th style="width:15%">Цена</th>
+            <th style="width:12%"></th>
+          </tr>
+        </thead>
+        <tbody id="tbody">
+      <tr class="item-row" data-price="6720" data-name="Датчик положения коленвала" data-sku="100191111">
+        <td class="col-name">Датчик положения коленвала</td>
+        <td class="col-sku">100191111</td>
+        <td class="col-price price" data-price="6720">6 720 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="Датчик положения коленвала" data-sku="100191111" data-price="6720">В корзину</button>
+        </td>
+      </tr>
+      <tr class="item-row" data-price="7980" data-name="Датчик положения распредвала" data-sku="1002050CAT">
+        <td class="col-name">Датчик положения распредвала</td>
+        <td class="col-sku">1002050CAT</td>
+        <td class="col-price price" data-price="7980">7 980 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="Датчик положения распредвала" data-sku="1002050CAT" data-price="7980">В корзину</button>
+        </td>
+      </tr>
+      <tr class="item-row" data-price="2310" data-name="Датчик температуры охлаждающей жидкости" data-sku="1306360ABC">
+        <td class="col-name">Датчик температуры охлаждающей жидкости</td>
+        <td class="col-sku">1306360ABC</td>
+        <td class="col-price price" data-price="2310">2 310 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="Датчик температуры охлаждающей жидкости" data-sku="1306360ABC" data-price="2310">В корзину</button>
+        </td>
+      </tr>
+      <tr class="item-row" data-price="1260" data-name="Концевой выключатель" data-sku="372030004">
+        <td class="col-name">Концевой выключатель</td>
+        <td class="col-sku">372030004</td>
+        <td class="col-price price" data-price="1260">1 260 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="Концевой выключатель" data-sku="372030004" data-price="1260">В корзину</button>
+        </td>
+      </tr>
+      <tr class="item-row" data-price="1050" data-name="Реле холодного пуска" data-sku="373516002">
+        <td class="col-name">Реле холодного пуска</td>
+        <td class="col-sku">373516002</td>
+        <td class="col-price price" data-price="1050">1 050 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="Реле холодного пуска" data-sku="373516002" data-price="1050">В корзину</button>
+        </td>
+      </tr>
+      <tr class="item-row" data-price="1050" data-name="Реле звукового сигнала" data-sku="373521002">
+        <td class="col-name">Реле звукового сигнала</td>
+        <td class="col-sku">373521002</td>
+        <td class="col-price price" data-price="1050">1 050 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="Реле звукового сигнала" data-sku="373521002" data-price="1050">В корзину</button>
+        </td>
+      </tr>
+      <tr class="item-row" data-price="1470" data-name="Датчик давления масла" data-sku="3S71 9278 AC">
+        <td class="col-name">Датчик давления масла</td>
+        <td class="col-sku">3S71 9278 AC</td>
+        <td class="col-price price" data-price="1470">1 470 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="Датчик давления масла" data-sku="3S71 9278 AC" data-price="1470">В корзину</button>
+        </td>
+      </tr>
+      <tr class="item-row" data-price="1050" data-name="Нагревательный элемент прикуривателя" data-sku="7C19-15052AA">
+        <td class="col-name">Нагревательный элемент прикуривателя</td>
+        <td class="col-sku">7C19-15052AA</td>
+        <td class="col-price price" data-price="1050">1 050 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="Нагревательный элемент прикуривателя" data-sku="7C19-15052AA" data-price="1050">В корзину</button>
+        </td>
+      </tr>
+      <tr class="item-row" data-price="8820" data-name="Переключатель замка зажигания" data-sku="AN3-11572-AC">
+        <td class="col-name">Переключатель замка зажигания</td>
+        <td class="col-sku">AN3-11572-AC</td>
+        <td class="col-price price" data-price="8820">8 820 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="Переключатель замка зажигания" data-sku="AN3-11572-AC" data-price="8820">В корзину</button>
+        </td>
+      </tr>
+      <tr class="item-row" data-price="1260" data-name="Выключатель дверного освещения" data-sku="AN3-14A658-AB">
+        <td class="col-name">Выключатель дверного освещения</td>
+        <td class="col-sku">AN3-14A658-AB</td>
+        <td class="col-price price" data-price="1260">1 260 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="Выключатель дверного освещения" data-sku="AN3-14A658-AB" data-price="1260">В корзину</button>
+        </td>
+      </tr>
+      <tr class="item-row" data-price="23520" data-name="Датчик расхода воздуха" data-sku="DN3-12B579-AA">
+        <td class="col-name">Датчик расхода воздуха</td>
+        <td class="col-sku">DN3-12B579-AA</td>
+        <td class="col-price price" data-price="23520">23 520 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="Датчик расхода воздуха" data-sku="DN3-12B579-AA" data-price="23520">В корзину</button>
+        </td>
+      </tr>
+      <tr class="item-row" data-price="10290" data-name="Датчик уровня воды" data-sku="ELN6-8B397-CA">
+        <td class="col-name">Датчик уровня воды</td>
+        <td class="col-sku">ELN6-8B397-CA</td>
+        <td class="col-price price" data-price="10290">10 290 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="Датчик уровня воды" data-sku="ELN6-8B397-CA" data-price="10290">В корзину</button>
+        </td>
+      </tr>
+      <tr class="item-row" data-price="1260" data-name="Главное реле управления" data-sku="EP1-13950-AA">
+        <td class="col-name">Главное реле управления</td>
+        <td class="col-sku">EP1-13950-AA</td>
+        <td class="col-price price" data-price="1260">1 260 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="Главное реле управления" data-sku="EP1-13950-AA" data-price="1260">В корзину</button>
+        </td>
+      </tr>
+      <tr class="item-row" data-price="25410" data-name="Датчик давления топлива" data-sku="HP1-9F972-AA">
+        <td class="col-name">Датчик давления топлива</td>
+        <td class="col-sku">HP1-9F972-AA</td>
+        <td class="col-price price" data-price="25410">25 410 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="Датчик давления топлива" data-sku="HP1-9F972-AA" data-price="25410">В корзину</button>
+        </td>
+      </tr>
+      <tr class="item-row" data-price="52710" data-name="Стартер AT JM" data-sku="JN1-11000-AC">
+        <td class="col-name">Стартер AT JM</td>
+        <td class="col-sku">JN1-11000-AC</td>
+        <td class="col-price price" data-price="52710">52 710 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="Стартер AT JM" data-sku="JN1-11000-AC" data-price="52710">В корзину</button>
+        </td>
+      </tr>
+      <tr class="item-row" data-price="9240" data-name="Датчик давления воздуха" data-sku="KN3-2A131-DA">
+        <td class="col-name">Датчик давления воздуха</td>
+        <td class="col-sku">KN3-2A131-DA</td>
+        <td class="col-price price" data-price="9240">9 240 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="Датчик давления воздуха" data-sku="KN3-2A131-DA" data-price="9240">В корзину</button>
+        </td>
+      </tr>
+      <tr class="item-row" data-price="34230" data-name="Вентилятор" data-sku="KN3-8C617-BA">
+        <td class="col-name">Вентилятор</td>
+        <td class="col-sku">KN3-8C617-BA</td>
+        <td class="col-price price" data-price="34230">34 230 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="Вентилятор" data-sku="KN3-8C617-BA" data-price="34230">В корзину</button>
+        </td>
+      </tr>
+      <tr class="item-row" data-price="2100" data-name="Датчик нажатия педали тормоза" data-sku="KP2-13480-AB">
+        <td class="col-name">Датчик нажатия педали тормоза</td>
+        <td class="col-sku">KP2-13480-AB</td>
+        <td class="col-price price" data-price="2100">2 100 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="Датчик нажатия педали тормоза" data-sku="KP2-13480-AB" data-price="2100">В корзину</button>
+        </td>
+      </tr>
+      <tr class="item-row" data-price="16170" data-name="Датчик давления" data-sku="LC19-5H295-AA">
+        <td class="col-name">Датчик давления</td>
+        <td class="col-sku">LC19-5H295-AA</td>
+        <td class="col-price price" data-price="16170">16 170 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="Датчик давления" data-sku="LC19-5H295-AA" data-price="16170">В корзину</button>
+        </td>
+      </tr>
+      <tr class="item-row" data-price="2100" data-name="Реле стартера" data-sku="LN1-11450-AA">
+        <td class="col-name">Реле стартера</td>
+        <td class="col-sku">LN1-11450-AA</td>
+        <td class="col-price price" data-price="2100">2 100 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="Реле стартера" data-sku="LN1-11450-AA" data-price="2100">В корзину</button>
+        </td>
+      </tr>
+      <tr class="item-row" data-price="56700" data-name="Генератор в сборе" data-sku="LN6-10300-BB">
+        <td class="col-name">Генератор в сборе</td>
+        <td class="col-sku">LN6-10300-BB</td>
+        <td class="col-price price" data-price="56700">56 700 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="Генератор в сборе" data-sku="LN6-10300-BB" data-price="56700">В корзину</button>
+        </td>
+      </tr>
+      <tr class="item-row" data-price="2940" data-name="Кнопка сигнала аварийной остановки в сборе" data-sku="LN6-10839-AA">
+        <td class="col-name">Кнопка сигнала аварийной остановки в сборе</td>
+        <td class="col-sku">LN6-10839-AA</td>
+        <td class="col-price price" data-price="2940">2 940 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="Кнопка сигнала аварийной остановки в сборе" data-sku="LN6-10839-AA" data-price="2940">В корзину</button>
+        </td>
+      </tr>
+      <tr class="item-row" data-price="8820" data-name="Шлейф руля" data-sku="LN6-14011-AB">
+        <td class="col-name">Шлейф руля</td>
+        <td class="col-sku">LN6-14011-AB</td>
+        <td class="col-price price" data-price="8820">8 820 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="Шлейф руля" data-sku="LN6-14011-AB" data-price="8820">В корзину</button>
+        </td>
+      </tr>
+      <tr class="item-row" data-price="7350" data-name="Датчик скорости переднего колеса (датчик ABS)" data-sku="LN6-14015-MA">
+        <td class="col-name">Датчик скорости переднего колеса (датчик ABS)</td>
+        <td class="col-sku">LN6-14015-MA</td>
+        <td class="col-price price" data-price="7350">7 350 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="Датчик скорости переднего колеса (датчик ABS)" data-sku="LN6-14015-MA" data-price="7350">В корзину</button>
+        </td>
+      </tr>
+      <tr class="item-row" data-price="4200" data-name="Переключатель стеклоподъемника пассажира" data-sku="LN6-14529-AA">
+        <td class="col-name">Переключатель стеклоподъемника пассажира</td>
+        <td class="col-sku">LN6-14529-AA</td>
+        <td class="col-price price" data-price="4200">4 200 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="Переключатель стеклоподъемника пассажира" data-sku="LN6-14529-AA" data-price="4200">В корзину</button>
+        </td>
+      </tr>
+      <tr class="item-row" data-price="10710" data-name="Переключатель стеклоподъемника водителя" data-sku="LN6-14530-AA">
+        <td class="col-name">Переключатель стеклоподъемника водителя</td>
+        <td class="col-sku">LN6-14530-AA</td>
+        <td class="col-price price" data-price="10710">10 710 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="Переключатель стеклоподъемника водителя" data-sku="LN6-14530-AA" data-price="10710">В корзину</button>
+        </td>
+      </tr>
+      <tr class="item-row" data-price="3150" data-name="Лампа габаритная" data-sku="LN6-15401-AC">
+        <td class="col-name">Лампа габаритная</td>
+        <td class="col-sku">LN6-15401-AC</td>
+        <td class="col-price price" data-price="3150">3 150 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="Лампа габаритная" data-sku="LN6-15401-AC" data-price="3150">В корзину</button>
+        </td>
+      </tr>
+      <tr class="item-row" data-price="4200" data-name="Радиоантенна" data-sku="LN6-18A886-BE">
+        <td class="col-name">Радиоантенна</td>
+        <td class="col-sku">LN6-18A886-BE</td>
+        <td class="col-price price" data-price="4200">4 200 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="Радиоантенна" data-sku="LN6-18A886-BE" data-price="4200">В корзину</button>
+        </td>
+      </tr>
+      <tr class="item-row" data-price="8190" data-name="датчик топлива в сборе" data-sku="LN6-9H307-BA">
+        <td class="col-name">датчик топлива в сборе</td>
+        <td class="col-sku">LN6-9H307-BA</td>
+        <td class="col-price price" data-price="8190">8 190 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="датчик топлива в сборе" data-sku="LN6-9H307-BA" data-price="8190">В корзину</button>
+        </td>
+      </tr>
+      <tr class="item-row" data-price="17430" data-name="Регулятор стекла правой передней двери в сборе" data-sku="LN6-V23200-AB">
+        <td class="col-name">Регулятор стекла правой передней двери в сборе</td>
+        <td class="col-sku">LN6-V23200-AB</td>
+        <td class="col-price price" data-price="17430">17 430 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="Регулятор стекла правой передней двери в сборе" data-sku="LN6-V23200-AB" data-price="17430">В корзину</button>
+        </td>
+      </tr>
+      <tr class="item-row" data-price="17430" data-name="Регулятор стекла левой передней двери в сборе" data-sku="LN6-V23201-AB">
+        <td class="col-name">Регулятор стекла левой передней двери в сборе</td>
+        <td class="col-sku">LN6-V23201-AB</td>
+        <td class="col-price price" data-price="17430">17 430 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="Регулятор стекла левой передней двери в сборе" data-sku="LN6-V23201-AB" data-price="17430">В корзину</button>
+        </td>
+      </tr>
+      <tr class="item-row" data-price="10080" data-name="Датчик скорости левого заднего колеса (датчик ABS)" data-sku="MC3186L">
+        <td class="col-name">Датчик скорости левого заднего колеса (датчик ABS)</td>
+        <td class="col-sku">MC3186L</td>
+        <td class="col-price price" data-price="10080">10 080 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="Датчик скорости левого заднего колеса (датчик ABS)" data-sku="MC3186L" data-price="10080">В корзину</button>
+        </td>
+      </tr>
+      <tr class="item-row" data-price="10080" data-name="Датчик скорости заднего правого колеса (датчик ABS)" data-sku="MC3187R">
+        <td class="col-name">Датчик скорости заднего правого колеса (датчик ABS)</td>
+        <td class="col-sku">MC3187R</td>
+        <td class="col-price price" data-price="10080">10 080 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="Датчик скорости заднего правого колеса (датчик ABS)" data-sku="MC3187R" data-price="10080">В корзину</button>
+        </td>
+      </tr>
+      <tr class="item-row" data-price="646800" data-name="Блок управления" data-sku="MN6-10844-AA">
+        <td class="col-name">Блок управления</td>
+        <td class="col-sku">MN6-10844-AA</td>
+        <td class="col-price price" data-price="646800">646 800 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="Блок управления" data-sku="MN6-10844-AA" data-price="646800">В корзину</button>
+        </td>
+      </tr>
+      <tr class="item-row" data-price="30870" data-name="Вентилятор" data-sku="NF100K5DDA02 000">
+        <td class="col-name">Вентилятор</td>
+        <td class="col-sku">NF100K5DDA02 000</td>
+        <td class="col-price price" data-price="30870">30 870 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="Вентилятор" data-sku="NF100K5DDA02 000" data-price="30870">В корзину</button>
+        </td>
+      </tr>
+      <tr class="item-row" data-price="24570" data-name="Проводка двигателя" data-sku="PAB3-12B637-DB">
+        <td class="col-name">Проводка двигателя</td>
+        <td class="col-sku">PAB3-12B637-DB</td>
+        <td class="col-price price" data-price="24570">24 570 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="Проводка двигателя" data-sku="PAB3-12B637-DB" data-price="24570">В корзину</button>
+        </td>
+      </tr>
+      <tr class="item-row" data-price="12810" data-name="Переключатель подрулевой левый" data-sku="PAB3-13N064-AA">
+        <td class="col-name">Переключатель подрулевой левый</td>
+        <td class="col-sku">PAB3-13N064-AA</td>
+        <td class="col-price price" data-price="12810">12 810 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="Переключатель подрулевой левый" data-sku="PAB3-13N064-AA" data-price="12810">В корзину</button>
+        </td>
+      </tr>
+      <tr class="item-row" data-price="76440" data-name="Жгут проводов: кабина" data-sku="PAB3-14033-FA">
+        <td class="col-name">Жгут проводов: кабина</td>
+        <td class="col-sku">PAB3-14033-FA</td>
+        <td class="col-price price" data-price="76440">76 440 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="Жгут проводов: кабина" data-sku="PAB3-14033-FA" data-price="76440">В корзину</button>
+        </td>
+      </tr>
+      <tr class="item-row" data-price="144480" data-name="Жгут проводов: рама, передняя часть" data-sku="PAB3-14035-LD">
+        <td class="col-name">Жгут проводов: рама, передняя часть</td>
+        <td class="col-sku">PAB3-14035-LD</td>
+        <td class="col-price price" data-price="144480">144 480 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="Жгут проводов: рама, передняя часть" data-sku="PAB3-14035-LD" data-price="144480">В корзину</button>
+        </td>
+      </tr>
+      <tr class="item-row" data-price="43260" data-name="Блок управления кабины" data-sku="PAB3-14A073-AA">
+        <td class="col-name">Блок управления кабины</td>
+        <td class="col-sku">PAB3-14A073-AA</td>
+        <td class="col-price price" data-price="43260">43 260 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="Блок управления кабины" data-sku="PAB3-14A073-AA" data-price="43260">В корзину</button>
+        </td>
+      </tr>
+      <tr class="item-row" data-price="1050" data-name="Реле" data-sku="PN6-2090011-AA">
+        <td class="col-name">Реле</td>
+        <td class="col-sku">PN6-2090011-AA</td>
+        <td class="col-price price" data-price="1050">1 050 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="Реле" data-sku="PN6-2090011-AA" data-price="1050">В корзину</button>
+        </td>
+      </tr>
+      <tr class="item-row" data-price="1050" data-name="Реле" data-sku="PN6-2090011-BA">
+        <td class="col-name">Реле</td>
+        <td class="col-sku">PN6-2090011-BA</td>
+        <td class="col-price price" data-price="1050">1 050 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="Реле" data-sku="PN6-2090011-BA" data-price="1050">В корзину</button>
+        </td>
+      </tr>
+      <tr class="item-row" data-price="19320" data-name="Блок кнопок управления кондиционером" data-sku="QN6-19980-AA">
+        <td class="col-name">Блок кнопок управления кондиционером</td>
+        <td class="col-sku">QN6-19980-AA</td>
+        <td class="col-price price" data-price="19320">19 320 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="Блок кнопок управления кондиционером" data-sku="QN6-19980-AA" data-price="19320">В корзину</button>
+        </td>
+      </tr>
+      <tr class="item-row" data-price="35490" data-name="Регулятор оборотов двигателя на х/х AT JM" data-sku="RU8897700930-1">
+        <td class="col-name">Регулятор оборотов двигателя на х/х AT JM</td>
+        <td class="col-sku">RU8897700930-1</td>
+        <td class="col-price price" data-price="35490">35 490 ₽</td>
+        <td class="col-actions">
+          <button class="buy-btn" data-name="Регулятор оборотов двигателя на х/х AT JM" data-sku="RU8897700930-1" data-price="35490">В корзину</button>
+        </td>
+      </tr>
+</tbody>
+      </table>
+      <div class="empty" id="empty" style="display:none;">Ничего не найдено. Попробуй изменить фильтры.</div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">© 2024 AmberTruck JM93. Локальная корзина в браузере (не стирается при переходах между категориями).</div>
+</footer>
+
+<!-- Cart Modal -->
+<div class="modal-backdrop" id="cartBackdrop" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-label="Корзина">
+    <div class="modal-head">
+      <h2>Корзина</h2>
+      <button class="btn" id="closeCart" type="button">Закрыть</button>
+    </div>
+
+    <div class="cart-list" id="cartList"></div>
+
+    <div class="total">
+      <div>Итого: <b id="cartTotal">0 ₽</b></div>
+      <button class="btn" id="clearCart" type="button">Очистить</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const CART_KEY = "ambertruck_cart_v1";
+
+  const fmt = (n) => {
+    const v = Math.round((Number(n) || 0) * 100) / 100;
+    const isInt = Math.abs(v - Math.round(v)) < 1e-9;
+    const s = (isInt ? String(Math.round(v)) : v.toFixed(2)).replace(".", ",");
+    // thousands with spaces
+    const parts = s.split(",");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    return parts.join(",") + " ₽";
+  };
+
+  const readCart = () => {
+    try {
+      const raw = localStorage.getItem(CART_KEY);
+      const obj = raw ? JSON.parse(raw) : {};
+      return (obj && typeof obj === "object") ? obj : {};
+    } catch (e) {
+      return {};
+    }
+  };
+
+  const writeCart = (cart) => {
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+  };
+
+  const cartCountEl = document.getElementById("cartCount");
+  const openCartBtn = document.getElementById("openCart");
+  const closeCartBtn = document.getElementById("closeCart");
+  const backdrop = document.getElementById("cartBackdrop");
+  const cartList = document.getElementById("cartList");
+  const cartTotal = document.getElementById("cartTotal");
+  const clearCartBtn = document.getElementById("clearCart");
+
+  function updateCartBadge() {
+    const cart = readCart();
+    let count = 0;
+    for (const sku in cart) count += cart[sku].qty || 0;
+    cartCountEl.textContent = String(count);
+  }
+
+  function addToCart({ sku, name, price }) {
+    const cart = readCart();
+    if (!cart[sku]) cart[sku] = { sku, name, price: Number(price) || 0, qty: 0 };
+    cart[sku].qty += 1;
+    writeCart(cart);
+    updateCartBadge();
+  }
+
+  function setQty(sku, qty) {
+    const cart = readCart();
+    if (!cart[sku]) return;
+    cart[sku].qty = qty;
+    if (cart[sku].qty <= 0) delete cart[sku];
+    writeCart(cart);
+    renderCart();
+    updateCartBadge();
+  }
+
+  function renderCart() {
+    const cart = readCart();
+    const items = Object.values(cart);
+    if (!items.length) {
+      cartList.innerHTML = '<div class="empty" style="display:block">Корзина пустая.</div>';
+      cartTotal.textContent = fmt(0);
+      return;
+    }
+    let total = 0;
+    cartList.innerHTML = items.map(it => {
+      const line = (Number(it.price)||0) * (Number(it.qty)||0);
+      total += line;
+      return `
+        <div class="cart-item">
+          <div>
+            <b>${escapeHtml(it.name)}</b>
+            <small>${escapeHtml(it.sku)} • ${fmt(it.price)}</small>
+          </div>
+          <div class="qty-controls">
+            <button class="icon-btn" data-act="dec" data-sku="${escapeHtml(it.sku)}" type="button">−</button>
+            <b>${it.qty}</b>
+            <button class="icon-btn" data-act="inc" data-sku="${escapeHtml(it.sku)}" type="button">+</button>
+          </div>
+        </div>
+      `;
+    }).join("");
+    cartTotal.textContent = fmt(total);
+  }
+
+  function openCart() {
+    renderCart();
+    backdrop.style.display = "flex";
+    backdrop.setAttribute("aria-hidden", "false");
+  }
+
+  function closeCart() {
+    backdrop.style.display = "none";
+    backdrop.setAttribute("aria-hidden", "true");
+  }
+
+  function escapeHtml(str) {
+    return String(str ?? "").replace(/[&<>"']/g, (m) => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));
+  }
+
+  // Bind buy buttons
+  document.querySelectorAll(".buy-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      addToCart({
+        sku: btn.dataset.sku,
+        name: btn.dataset.name,
+        price: btn.dataset.price
+      });
+      btn.textContent = "Добавлено ✓";
+      setTimeout(() => (btn.textContent = "В корзину"), 700);
+    });
+  });
+
+  // Cart modal events
+  openCartBtn.addEventListener("click", openCart);
+  closeCartBtn.addEventListener("click", closeCart);
+  backdrop.addEventListener("click", (e) => {
+    if (e.target === backdrop) closeCart();
+  });
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && backdrop.style.display === "flex") closeCart();
+  });
+  clearCartBtn.addEventListener("click", () => {
+    writeCart({});
+    renderCart();
+    updateCartBadge();
+  });
+  cartList.addEventListener("click", (e) => {
+    const btn = e.target.closest("button[data-act]");
+    if (!btn) return;
+    const sku = btn.dataset.sku;
+    const cart = readCart();
+    const item = cart[sku];
+    if (!item) return;
+    if (btn.dataset.act === "inc") setQty(sku, (item.qty||0) + 1);
+    if (btn.dataset.act === "dec") setQty(sku, (item.qty||0) - 1);
+  });
+
+  // Filtering & sorting
+  const q = document.getElementById("q");
+  const minP = document.getElementById("minP");
+  const maxP = document.getElementById("maxP");
+  const sort = document.getElementById("sort");
+  const reset = document.getElementById("reset");
+  const tbodyEl = document.getElementById("tbody");
+  const emptyEl = document.getElementById("empty");
+
+  const originalRows = Array.from(tbodyEl.querySelectorAll("tr"));
+  const parseNum = (s) => {
+    const v = String(s ?? "").replace(/\s+/g,"").replace(",",".").replace(/[^0-9.]/g,"");
+    return v ? Number(v) : NaN;
+  };
+
+  function applyFilter() {
+    const query = q.value.trim().toLowerCase();
+    const min = parseNum(minP.value);
+    const max = parseNum(maxP.value);
+
+    let any = 0;
+    originalRows.forEach(tr => {
+      const name = (tr.dataset.name || "").toLowerCase();
+      const sku = (tr.dataset.sku || "").toLowerCase();
+      const price = Number(tr.dataset.price || 0);
+
+      const okQuery = !query || name.includes(query) || sku.includes(query);
+      const okMin = isNaN(min) || price >= min;
+      const okMax = isNaN(max) || price <= max;
+
+      const show = okQuery && okMin && okMax;
+      tr.style.display = show ? "" : "none";
+      if (show) any++;
+    });
+    emptyEl.style.display = any ? "none" : "block";
+  }
+
+  function applySort() {
+    const mode = sort.value;
+    const rows = originalRows.slice();
+
+    const cmpText = (a, b, key) => {
+      const av = (a.dataset[key] || "").toLowerCase();
+      const bv = (b.dataset[key] || "").toLowerCase();
+      return av.localeCompare(bv, "ru");
+    };
+    const cmpNum = (a, b, key) => (Number(a.dataset[key]||0) - Number(b.dataset[key]||0));
+
+    if (mode === "default") {
+      // Restore original DOM order
+      rows.forEach(r => tbodyEl.appendChild(r));
+    } else if (mode === "price_asc") {
+      rows.sort((a,b)=>cmpNum(a,b,"price"));
+      rows.forEach(r => tbodyEl.appendChild(r));
+    } else if (mode === "price_desc") {
+      rows.sort((a,b)=>cmpNum(b,a,"price"));
+      rows.forEach(r => tbodyEl.appendChild(r));
+    } else if (mode === "name_asc") {
+      rows.sort((a,b)=>cmpText(a,b,"name"));
+      rows.forEach(r => tbodyEl.appendChild(r));
+    } else if (mode === "name_desc") {
+      rows.sort((a,b)=>cmpText(b,a,"name"));
+      rows.forEach(r => tbodyEl.appendChild(r));
+    }
+    // Keep filtering after sorting
+    applyFilter();
+  }
+
+  function resetAll() {
+    q.value = "";
+    minP.value = "";
+    maxP.value = "";
+    sort.value = "default";
+    // restore original order and show all
+    originalRows.forEach(r => tbodyEl.appendChild(r));
+    originalRows.forEach(r => r.style.display = "");
+    emptyEl.style.display = "none";
+  }
+
+  q.addEventListener("input", applyFilter);
+  minP.addEventListener("input", applyFilter);
+  maxP.addEventListener("input", applyFilter);
+  sort.addEventListener("change", applySort);
+  reset.addEventListener("click", resetAll);
+
+  // Init
+  updateCartBadge();
+  applyFilter();
+})();
+</script>
+</body>
+</html>

@@ -27,7 +27,7 @@ document.addEventListener("click", function(e){
     const btn = e.target.closest(".buy-btn");
     if(!btn) return;
 
-    const card = btn.closest("[data-name]");
+    const card = btn.closest("tr);
     if(!card) return;
 
     const name = card.dataset.name;
